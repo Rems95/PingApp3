@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "563354453863",
+    "firebase_url": "https://ping3-4cb4a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ping3-4cb4a",
+    "storage_bucket": "ping3-4cb4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563354453863:android:b4cdb5c8d37e8936de91c2",
+        "android_client_info": {
+          "package_name": "com.example.ping3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563354453863-sapekuisum7jfnpsh9co71u65l1jvdfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_hQIk0FXuZOVuOh9KlNZkn_DnHCxVpfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563354453863-sapekuisum7jfnpsh9co71u65l1jvdfp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
