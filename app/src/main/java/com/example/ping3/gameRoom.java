@@ -39,7 +39,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
     String update_key;
     String winner_select;
     ImageView imageView;
-    Button exitgameBtn,newPlayer, scanQR;
+    Button exitgameBtn,newPlayer, scanQR,go;
     Thread thread ;
     public final static int QRcodeWidth = 500 ;
     Bitmap bitmap ;
@@ -62,6 +62,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
         exitgameBtn = findViewById(R.id.exitgameBtn);
         scanQR = findViewById(R.id.scanQR);
         newPlayer=findViewById(R.id.newPlayer);
+        go=findViewById(R.id.goToMaps);
 
         exitgameBtn.setOnClickListener(this);
         mContext = getApplicationContext();
@@ -161,6 +162,13 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                     e.printStackTrace();
                 }
 
+            }
+        });
+        go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(gameRoom.this, MapsActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_room.xml" value="0.42857142857142855" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_login.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_maps.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_register.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/drawable/custombuttonblackoval.xml" value="0.12604166666666666" />
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_login.xml" value="0.10625" />
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_register.xml" value="0.10625" />
