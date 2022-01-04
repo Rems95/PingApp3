@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -31,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +46,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     private Location mLastLocation;
     private FirebaseAnalytics mFirebaseAnalytics;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    FirebaseAuth fAuth;
+    Player_model player = new Player_model();
+    String room_id;
+
 
 
 
@@ -58,6 +66,11 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Intent intent =getIntent();
+        room_id = intent.getStringExtra("room_id");
+        addPlayer();
+        getDeviceLocation();
 
     }
 
@@ -87,6 +100,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     @Override
     public boolean onMyLocationButtonClick() {
         getDeviceLocation();
+        getOthersPosition();
         return false;
     }
 
@@ -97,6 +111,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     }
 
     private void getDeviceLocation(){
+        float zoomLevel = 15.0f;
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try{
             Task location = mFusedLocationProviderClient.getLastLocation();
@@ -105,8 +120,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
                         Location currentLocation = (Location)task.getResult();
-                        Toast.makeText(MapsActivity.this,"Current location is"+currentLocation.getLongitude()+","+currentLocation.getLatitude(),Toast.LENGTH_SHORT).show();
-                        AddPosition(currentLocation.getLatitude(),currentLocation.getLongitude());
+                        //Toast.makeText(MapsActivity.this,"Current location is"+currentLocation.getLongitude()+","+currentLocation.getLatitude(),Toast.LENGTH_SHORT).show();
+                        UpdatePosition(currentLocation.getLatitude(),currentLocation.getLongitude());
+                        LatLng pin = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pin, zoomLevel));
                     } else{
                         Toast.makeText(MapsActivity.this,"Current location is null",Toast.LENGTH_SHORT).show();
                     }
@@ -117,40 +134,65 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         }
     }
 
-    public void addUser(){
+    public void addPlayer(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
         // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+        player.setPlayer_id(fAuth.getUid());
+        player.setEmail(fAuth.getCurrentUser().getEmail());
 
-        // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("TAG111", "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG111", "Error adding document", e);
-                    }
-                });
+
+
+        player.setPseudo("New Player");
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("UID", player.getPlayer_id());
+        user.put("Email", player.getEmail());
+        user.put("Pseudo", player.getPseudo());
+        user.put("Room_id",room_id);
+
+        db.collection("player").document(player.getEmail()).set(user);
+
+
     }
 
-    public void AddPosition(double x,double y){
+    public void UpdatePosition(double x,double y){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // Create a new user with a first and last name
-        Map<String, Object> position = new HashMap<>();
-        position.put("X",x);
-        position.put("Y", y);
-        position.put("room", 1815);
 
-        // Add a new document with a generated ID
-        db.collection("player").document("bakahook@gmail.com").set(position);
+        // Update information of position
+        db.collection("player").document(player.getEmail()).update("X",x);
+        db.collection("player").document(player.getEmail()).update("Y",y);
+
+    }
+
+    public void getOthersPosition(){
+        mMap.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final double[] x = new double[1];
+        final double[] y = new double[1];
+        float zoomLevel = 15.0f;
+
+        db.collection("player").whereEqualTo("Room_id",room_id).whereNotEqualTo("UID",player.getPlayer_id())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Toast.makeText(MapsActivity.this,"OK",Toast.LENGTH_SHORT).show();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                x[0] = Double.parseDouble(document.getData().get("X").toString());
+                                y[0] = Double.parseDouble(document.getData().get("Y").toString());
+                                LatLng pin = new LatLng(x[0], y[0]);
+                                mMap.addMarker(new MarkerOptions().position(pin));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pin, zoomLevel));
+                                //Toast.makeText(MapsActivity.this,"x"+document.getData().get("X"),Toast.LENGTH_SHORT).show();
+
+                            }
+                        } else {
+                            Toast.makeText(MapsActivity.this,"Error getting documents."+task.getException(),Toast.LENGTH_LONG).show();
+                            Log.w("TAG111", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }

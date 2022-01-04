@@ -4,14 +4,19 @@ public class Player_model {
 
     private String pseudo;
     private String player_id;
+    private String email;
+    private double x;
+    private double y;
 
     public Player_model(String pseudo, String player_id) {
         this.pseudo = pseudo;
         this.player_id = player_id;
     }
-    public Player_model() {
 
+
+    public Player_model() {
     }
+
     public String getPseudo() {
         return pseudo;
     }
@@ -34,5 +39,29 @@ public class Player_model {
                 "pseudo='" + pseudo + '\'' +
                 ", player_id=" + player_id +
                 '}';
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

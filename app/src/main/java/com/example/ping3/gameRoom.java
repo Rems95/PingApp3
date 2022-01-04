@@ -168,6 +168,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(gameRoom.this, MapsActivity.class);
+                intent.putExtra("room_id",roomId);
                 startActivity(intent);
             }
         });
