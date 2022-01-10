@@ -9,20 +9,47 @@ public class gameroom_model {
     private String creator;
     private Integer roomId;
     private Integer status;
+    private Integer nbPlayers;
+    private Integer time;
+    private String level;
 
-    public gameroom_model(ArrayList<Player_model> players, String creator, Integer roomId, Integer status) {
-        super();
+    public gameroom_model(ArrayList<Player_model> players, String creator, Integer roomId, Integer status, Integer nbPlayers, Integer time, String level) {
         Players = players;
         this.creator = creator;
         this.roomId = roomId;
         this.status = status;
+        this.nbPlayers = nbPlayers;
+        this.time = time;
+        this.level = level;
     }
+
 
     public gameroom_model() {
     }
 
+    public Integer getNbPlayers() {
+        return nbPlayers;
+    }
 
+    public void setNbPlayers(Integer nbPlayers) {
+        this.nbPlayers = nbPlayers;
+    }
 
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
 
     public String getCreator() {
         return creator;

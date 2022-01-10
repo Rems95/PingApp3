@@ -329,8 +329,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                         dialog.show();
 
 
-
-                    } else if (player.equals("PLAYER 2")) {
+                    } else  {
 
                         final AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
                         builder.setTitle("Please confirm");
@@ -352,16 +351,14 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // Do something when want to stay in the app
+
                             }
                         });
-
                         // Create the alert dialog using alert dialog builder
                         AlertDialog dialog = builder.create();
 
                         // Finally, display the dialog when user press back button
                         dialog.show();
-
                     }
                 }
 
@@ -374,7 +371,9 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
         });
 
     }
+public void joinRoom(){
 
+}
 }
 
 

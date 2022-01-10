@@ -1,4 +1,30 @@
 <resources>
     <string name="app_name">Ping3</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+<!--Add values for spinners in the game setting-->
+<string-array name="time">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+</string-array>
+
+<string-array name="nbplayers">
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+</string-array>
+
+<string-array name="level">
+    <item>EASY</item>
+    <item>MEDIUM</item>
+    <item>DIFICULT</item>
+</string-array>
+
 </resources>
