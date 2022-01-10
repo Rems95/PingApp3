@@ -14,8 +14,10 @@
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_register.xml" value="0.10625" />
         <entry key="app/src/main/res/layout/activity_game_room.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.26358695652173914" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26358695652173914" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.184375" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.184375" />
       </map>
     </option>
   </component>

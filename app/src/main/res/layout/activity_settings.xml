@@ -4,79 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".activities.SettingsActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="GAME SETTINGS"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_weight="1"/>
+                android:textColor="@color/colorPrimaryDark" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingVertical="8dp"
                 android:paddingHorizontal="50dp"
-                android:gravity="center">
+                android:paddingVertical="8dp">
+
                 <TextView
                     android:id="@+id/timeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Time" />
+
                 <Spinner
                     android:id="@+id/timeSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingVertical="8dp"
                 android:paddingHorizontal="50dp"
-                android:gravity="center">
+                android:paddingVertical="8dp">
+
                 <TextView
                     android:id="@+id/numberofplayers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Number of Players"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Number of Players" />
+
                 <Spinner
                     android:id="@+id/numberofplayersSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingVertical="8dp"
                 android:paddingHorizontal="50dp"
-                android:gravity="center">
+                android:paddingVertical="8dp">
+
                 <TextView
                     android:id="@+id/level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Game Level"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Game Level" />
+
                 <Spinner
                     android:id="@+id/levelSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
-
 
 
             <Button
