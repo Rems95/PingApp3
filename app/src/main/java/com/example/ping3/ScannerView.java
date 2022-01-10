@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,9 +29,12 @@ public class ScannerView extends AppCompatActivity implements ZXingScannerView.R
     DatabaseReference myRef_update,myRef_updatefull;
     String userID;
     String update_key;
+    Player_model player = new Player_model();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
 
@@ -61,58 +65,75 @@ public class ScannerView extends AppCompatActivity implements ZXingScannerView.R
             final String roomidx = rawResult.getText().replace("http://game.com/","");
 
 
-                myRef_updatefull = FirebaseDatabase.getInstance().getReference().child("gameRoom");
-                myRef_updatefull.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+            myRef_updatefull = FirebaseDatabase.getInstance().getReference().child("gameRoom");
+            System.out.println("nICE");
+            myRef_updatefull.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomidx))) {
+                    boolean flag = checkroomId(Integer.parseInt(roomidx), snapshot);
+                    if (!flag) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomidx))) {
+                                update_key = ds.getKey();
+                                myRef_update = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(update_key);
+                                myRef_update.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot ds) {
 
-                                    gameroom_model gr = ds.getValue(gameroom_model.class);
-                                    update_key = ds.getKey();
-                                    myRef_update = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(update_key);
-                                    myRef_update.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot ds) {
+                                        if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomidx))) {
+                                            gameroom_model gr_update = ds.getValue(gameroom_model.class);
+                                            if ((gr_update.getCreator()).equals(userID)) {
+                                                Intent intent = new Intent(getApplicationContext(), gameRoom.class);
+                                                intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
+                                                intent.putExtra("player",player.getPseudo() );
+                                                intent.putExtra("id",update_key);
+                                                startActivity(intent);
 
-                                            if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomidx))) {
-                                                gameroom_model gr_update = ds.getValue(gameroom_model.class);
-
-//                                                    gr_update.setPlayer2(userID);
-//                                                    gr_update.setStatus("Select a Move!");
-                                                    myRef_update.setValue(gr_update);
-                                                    Intent intent = new Intent(getApplicationContext(), gameRoom.class);
-                                                    intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
-                                                    intent.putExtra("player", "PLAYER 2");
-                                                    startActivity(intent);
+                                            } else {
+                                                player.setPlayer_id(userID);
+                                                player.setPseudo("Cat");
+                                                gr_update.addPlayers(player);
+                                                System.out.println("Player:"+player);
+                                                myRef_update.setValue(gr_update);
+                                                Intent intent = new Intent(getApplicationContext(), gameRoom.class);
+                                                intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
+                                                intent.putExtra("player",player.getPseudo() );
+                                                intent.putExtra("id",update_key);
+                                                startActivity(intent);
 
                                             }
-
                                         }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+                                    }
 
-                                        }
-                                    });
-                                }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
+                                    }
+                                });
                             }
-
 
                         }
 
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
                     }
-                });
+                    else{
+                        Toast.makeText(ScannerView.this,"Room ID Does Not Exist !",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
 
             }
 
-    }
+
 
     @Override
     protected void onPause() {
@@ -126,5 +147,17 @@ public class ScannerView extends AppCompatActivity implements ZXingScannerView.R
         scannerView.setResultHandler(this);
         scannerView.startCamera();
     }
+    public boolean checkroomId(int roomid , DataSnapshot dataSnapshot){
+        final gameroom_model gr = new gameroom_model();
 
+
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            gr.setRoomId(snapshot.getValue(gameroom_model.class).getRoomId());
+
+            if(gr.getRoomId().equals(roomid)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

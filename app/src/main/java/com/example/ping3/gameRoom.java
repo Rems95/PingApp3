@@ -37,10 +37,8 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
     FirebaseAuth fAuth;
     String userID;
     String update_key;
-    String winner_select;
     ImageView imageView;
     Button exitgameBtn,newPlayer, scanQR,go;
-    Thread thread ;
     public final static int QRcodeWidth = 500 ;
     Bitmap bitmap ;
     private Context mContext;
@@ -68,9 +66,19 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
         mContext = getApplicationContext();
         mActivity = gameRoom.this;
 
-        final gameroom_model gr = new gameroom_model();
-        myRef_players_full = FirebaseDatabase.getInstance().getReference().child("gameRoom");
-        myRef_players_full.addValueEventListener(new ValueEventListener() {
+        System.out.println(id);
+        Bundle extra = getIntent().getExtras();
+
+        if (extra != null) {
+
+            roomId = extra.getString("roomId");
+            player = extra.getString("player");
+            roomIdTV.setText(roomId);
+            playerTV.setText(player);
+
+
+        myRef_initial = FirebaseDatabase.getInstance().getReference().child("gameRoom");
+        myRef_initial.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -81,18 +89,18 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                         myRef_players.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        gameroom_model grlist = new gameroom_model();
-                        ArrayList<Player_model> Players= new ArrayList<Player_model>();
+                                gameroom_model grlist = new gameroom_model();
+                                ArrayList<Player_model> Players= new ArrayList<Player_model>();
 
-                        Players=snapshot.getValue(gameroom_model.class).getPlayers();
-                        playersList.setText("");
+                                Players=snapshot.getValue(gameroom_model.class).getPlayers();
+                                playersList.setText("");
 
-                        for (int i=0;i<Players.size();i++){
-                            playersList.append(Players.get(i).getPseudo());
-                            playersList.append(" ");
-                            System.out.println(Players.get(i).getPseudo());
+                                for (int i=0;i<Players.size();i++){
+                                    playersList.append(Players.get(i).getPseudo());
+                                    playersList.append(" ");
+                                    System.out.println(Players.get(i).getPseudo());
 
-                        }
+                                }
                             }
 
                             @Override
@@ -108,34 +116,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
 
             }
         });
-        System.out.println(id);
-        Bundle extra = getIntent().getExtras();
-
-        if (extra != null) {
-
-            roomId = extra.getString("roomId");
-            player = extra.getString("player");
-            roomIdTV.setText(roomId);
-            playerTV.setText(player);
-
         }
-
-        myRef_initial = FirebaseDatabase.getInstance().getReference().child("gameRoom");
-        myRef_initial.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomId))) {
-                        gameroom_model gr = ds.getValue(gameroom_model.class);
-                        update_key = ds.getKey();
-                    }
-                }}
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         newPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,8 +195,8 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.exitgameBtn:
                 final gameroom_model gr_exit = new gameroom_model();
-                System.out.println("Key:"+update_key);
-                myRef_exit = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(update_key);
+                System.out.println("Key:"+id);
+                myRef_exit = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id);
                 myRef_exit.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot ds) {
@@ -266,11 +247,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-//                                        gr_exit.setPlayer2Selection("null");
-//                                        gr_exit.setPlayer2("null");
-//                                        gr_exit.setWinner("null");
-//                                        gr_exit.setLoser("null");
-//                                        gr_exit.setStatus("Player 2 Left !!");
+
                                         myRef_exit.setValue(gr_exit);
                                         Toast.makeText(mContext,"Game Room Closed Successfully ! ",Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -282,17 +259,14 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        // Do something when want to stay in the app
-//                Toast.makeText(mContext,"thank you",Toast.LENGTH_LONG).show();
+
                                     }
                                 });
-
                                 // Create the alert dialog using alert dialog builder
                                 AlertDialog dialog = builder.create();
 
                                 // Finally, display the dialog when user press back button
                                 dialog.show();
-
                             }
                         }
 
@@ -402,52 +376,6 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
         });
 
     }
-
-    public String winnerCheck(String player1selection,String player2selection){
-        if ((player1selection.equals("ROCK"))&& (player2selection.equals("ROCK"))){
-            return("Its a Tie !");
-        }
-        else if ((player1selection.equals("ROCK"))&& (player2selection.equals("PAPER"))){
-            return("PLAYER 2 Wins !");
-        }
-        else if ((player1selection.equals("ROCK"))&& (player2selection.equals("SCISSOR"))){
-            return("PLAYER 1 Wins !");
-        }
-        else if ((player1selection.equals("PAPER"))&& (player2selection.equals("ROCK"))){
-            return("PLAYER 1 Wins !");
-        }
-        else if ((player1selection.equals("PAPER"))&& (player2selection.equals("PAPER"))){
-            return("Its a Tie !");
-        }
-        else if ((player1selection.equals("PAPER"))&& (player2selection.equals("SCISSOR"))){
-            return("PLAYER 2 Wins !");
-        }
-        else if ((player1selection.equals("SCISSOR"))&& (player2selection.equals("ROCK"))){
-            return("PLAYER 2 Wins !");
-        }
-        else if ((player1selection.equals("SCISSOR"))&& (player2selection.equals("PAPER"))){
-            return("PLAYER 1 Wins !");
-        }
-        else if ((player1selection.equals("SCISSOR"))&& (player2selection.equals("SCISSOR"))){
-            return("Its a Tie !");
-        }
-        return("null");
-    }
-
-    public void display(String player1selection, String player2selection, String message){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        builder.setTitle(message);
-        builder.setMessage("PLAYER 1 - "+player1selection+ "\nPLAYER 2 - "+player2selection);
-        builder.setCancelable(true);
-        // Create the alert dialog using alert dialog builder
-        AlertDialog dialog = builder.create();
-
-        // Finally, display the dialog when user press back button
-        dialog.show();
-    }
-
-
-
 
 }
 

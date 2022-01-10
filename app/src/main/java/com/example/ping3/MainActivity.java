@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 //                    if(flag) {
                         gameroom_model gr_push = new gameroom_model();
                         player.setPlayer_id(userID);
-                        player.setPseudo("Creator");
+                        player.setPseudo("MOUSE");
                         gr_push.setCreator(userID);
                         gr_push.setStatus(1);
                         gr_push.setRoomId(roomId);
@@ -115,9 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         if (TextUtils.isEmpty(roomidx)) {
                             Toast.makeText(MainActivity.this,"Room ID is required !",Toast.LENGTH_SHORT).show();
                             return;
-//                        } else if (!roomidx.matches(regex)) {
-//                            Toast.makeText(MainActivity.this,"Please Enter a Valid Room ID !",Toast.LENGTH_SHORT).show();
-//                            return;
+
                         } else {
 
                             myRef_updatefull = FirebaseDatabase.getInstance().getReference().child("gameRoom");
@@ -130,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
                                     if (!flag) {
                                         for (DataSnapshot ds : snapshot.getChildren()) {
                                             if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomidx))) {
-
-                                                gameroom_model gr = ds.getValue(gameroom_model.class);
                                                 update_key = ds.getKey();
                                                 myRef_update = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(update_key);
                                                 myRef_update.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,11 +141,11 @@ public class MainActivity extends AppCompatActivity {
                                                                 intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
                                                                 intent.putExtra("player",player.getPseudo() );
                                                                 intent.putExtra("id",update_key);
-
                                                                 startActivity(intent);
 
-
                                                             } else {
+                                                                    player.setPlayer_id(userID);
+                                                                    player.setPseudo("Cat");
                                                                     gr_update.addPlayers(player);
                                                                     System.out.println("Player:"+player);
                                                                     myRef_update.setValue(gr_update);
@@ -157,8 +153,7 @@ public class MainActivity extends AppCompatActivity {
                                                                     intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
                                                                     intent.putExtra("player",player.getPseudo() );
                                                                     intent.putExtra("id",update_key);
-
-                                                                startActivity(intent);
+                                                                    startActivity(intent);
 
                                                             }
                                                         }
