@@ -1,4 +1,4 @@
-package com.example.ping3;
+package com.example.ping3.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ping3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
-public class activity_register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     TextInputEditText email,password,confirmpwd;
     Button register;
     TextView alrlogin,guest;
@@ -60,7 +61,7 @@ public class activity_register extends AppCompatActivity {
         alrlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(activity_register.this,activity_login.class));
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 finish();
             }
         });
@@ -82,7 +83,7 @@ public class activity_register extends AppCompatActivity {
 
     public void validateandsubmit(){
         if(!validate()){
-            Toast.makeText(activity_register.this, "Enter required field correctly !!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Enter required field correctly !!", Toast.LENGTH_SHORT).show();
         }
         else{
             String mEmail = email.getText().toString().trim();
@@ -112,8 +113,8 @@ public class activity_register extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 progressbar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(activity_register.this, "Verification Email Has been sent !!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(activity_register.this,activity_login.class));
+                                Toast.makeText(RegisterActivity.this, "Verification Email Has been sent !!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                 finish();
 
 
@@ -123,7 +124,7 @@ public class activity_register extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 progressbar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(activity_register.this, "Email Not sent!!  "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Email Not sent!!  "+e.getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -131,7 +132,7 @@ public class activity_register extends AppCompatActivity {
 
                     }else{
                         progressbar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(activity_register.this, "Error"+task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Error"+task.getException().getMessage() , Toast.LENGTH_SHORT).show();
                     }
                 }
             });

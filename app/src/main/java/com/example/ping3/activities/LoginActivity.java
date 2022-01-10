@@ -1,4 +1,4 @@
-package com.example.ping3;
+package com.example.ping3.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ping3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
-public class activity_login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     TextInputEditText email,password;
     Button login;
@@ -67,17 +68,17 @@ public class activity_login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         progressbar = findViewById(R.id.log_progress);
         mContext = getApplicationContext();
-        mActivity = activity_login.this;
+        mActivity = LoginActivity.this;
 
         if(fAuth.getCurrentUser()!= null && fAuth.getCurrentUser().isEmailVerified()){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
 
         newusersignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(activity_login.this, activity_register.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
@@ -98,22 +99,22 @@ public class activity_login extends AppCompatActivity {
 
                         String mail = resetMail.getText().toString().trim();
                         if (TextUtils.isEmpty(mail)) {
-                            Toast.makeText(activity_login.this,"Email is Required",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Email is Required",Toast.LENGTH_SHORT).show();
                             return;
                         } else if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
-                            Toast.makeText(activity_login.this,"Please Enter a Valid Email !",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Please Enter a Valid Email !",Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         fAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(activity_login.this," Reset Link has been Sent !!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this," Reset Link has been Sent !!",Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(activity_login.this," Error !!  "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this," Error !!  "+e.getMessage(),Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -146,7 +147,7 @@ public class activity_login extends AppCompatActivity {
 
     public void validateandsubmit(){
         if(!validate()){
-            Toast.makeText(activity_login.this, "Enter required field correctly !!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Enter required field correctly !!", Toast.LENGTH_SHORT).show();
         }
         else{
             String mEmail = email.getText().toString().trim();
@@ -154,10 +155,9 @@ public class activity_login extends AppCompatActivity {
             String mPassword = password.getText().toString().trim();
 
             email.setText("");
-//            email.setHint("Email");
-//
+            email.setHint("Email");
             password.setText("");
-//            password.setHint("Password");
+            password.setHint("Password");
 
 
             progressbar.setVisibility(View.VISIBLE);
@@ -171,17 +171,17 @@ public class activity_login extends AppCompatActivity {
                     if(task.isSuccessful()){
                         if(user.isEmailVerified()){
                             progressbar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(activity_login.this, "Logged In Successfully !!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Logged In Successfully !!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else{
                             progressbar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(activity_login.this, "Email Verification Not Complete !!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Email Verification Not Complete !!", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                     else{
                         progressbar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(activity_login.this, "Error :"+task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Error :"+task.getException().getMessage() , Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -230,9 +230,7 @@ public class activity_login extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Do something when user want to exit the app
-                // Let allow the system to handle the event, such as exit the app
-//                activity_login.super.onBackPressed();
+
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

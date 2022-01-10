@@ -1,4 +1,4 @@
-package com.example.ping3;
+package com.example.ping3.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,6 +13,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ping3.models.Player_model;
+import com.example.ping3.R;
+import com.example.ping3.utils.ScannerView;
+import com.example.ping3.models.gameroom_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,16 +29,11 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button createRoom;
-    Button joinRoom;
+    Button createRoom,joinRoom,ScanBtn;
     Player_model player = new Player_model();
-    DatabaseReference myRef,Ref,myRef_update,myRef_updatefull;
+    DatabaseReference myRef,myRef_update,myRef_updatefull;
     FirebaseAuth fAuth;
-    String userID,id;
-    String update_key;
-    Button ScanBtn1;
-
-    public static String scantext;
+    String userID,id,update_key;
 
 
 
@@ -42,16 +41,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         createRoom = findViewById(R.id.createRoom);
         joinRoom = findViewById(R.id.joinRoom);
-        ScanBtn1 = (Button) findViewById(R.id.joinRoom2);
+        ScanBtn = (Button) findViewById(R.id.joinRoom2);
         fAuth = FirebaseAuth.getInstance();
         userID = fAuth.getCurrentUser().getUid();
-        player.setPlayer_id(userID);
-        player.setPseudo("NewUser");
 
-        ScanBtn1.setOnClickListener(new View.OnClickListener() {
+        ScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ScannerView.class));
@@ -69,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                      // boolean flag = checkroomId(roomId, snapshot);
-//                    if(flag) {
                         gameroom_model gr_push = new gameroom_model();
                         player.setPlayer_id(userID);
                         player.setPseudo("MOUSE");
@@ -80,13 +74,12 @@ public class MainActivity extends AppCompatActivity {
                         gr_push.addPlayers(player);
                         myRef.push().setValue(gr_push);
 
-                        Intent intent = new Intent(getApplicationContext(), gameRoom.class);
+                        Intent intent = new Intent(getApplicationContext(), GameroomActivity.class);
                         intent.putExtra("roomId", String.valueOf(gr_push.getRoomId()));
                         intent.putExtra("player",player.getPseudo());
                         intent.putExtra("id",id);
                         startActivity(intent);
                     }
-//                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -119,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
                         } else {
 
                             myRef_updatefull = FirebaseDatabase.getInstance().getReference().child("gameRoom");
-                            System.out.println("nICE");
                             myRef_updatefull.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -137,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                                                         if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomidx))) {
                                                             gameroom_model gr_update = ds.getValue(gameroom_model.class);
                                                             if ((gr_update.getCreator()).equals(userID)) {
-                                                                Intent intent = new Intent(getApplicationContext(), gameRoom.class);
+                                                                Intent intent = new Intent(getApplicationContext(), GameroomActivity.class);
                                                                 intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
                                                                 intent.putExtra("player",player.getPseudo() );
                                                                 intent.putExtra("id",update_key);
@@ -149,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                                                                     gr_update.addPlayers(player);
                                                                     System.out.println("Player:"+player);
                                                                     myRef_update.setValue(gr_update);
-                                                                    Intent intent = new Intent(getApplicationContext(), gameRoom.class);
+                                                                    Intent intent = new Intent(getApplicationContext(), GameroomActivity.class);
                                                                     intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
                                                                     intent.putExtra("player",player.getPseudo() );
                                                                     intent.putExtra("id",update_key);
@@ -203,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void logout(View view){
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(),activity_login.class));
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
     }
 

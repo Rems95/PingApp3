@@ -1,4 +1,4 @@
-package com.example.ping3;
+package com.example.ping3.models;
 
 import java.util.ArrayList;
 

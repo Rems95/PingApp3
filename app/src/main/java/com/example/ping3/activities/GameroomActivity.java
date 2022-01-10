@@ -1,4 +1,4 @@
-package com.example.ping3;
+package com.example.ping3.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ping3.models.Player_model;
+import com.example.ping3.R;
+import com.example.ping3.models.gameroom_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,14 +32,12 @@ import com.google.zxing.common.BitMatrix;
 
 import java.util.ArrayList;
 
-public class gameRoom extends AppCompatActivity implements View.OnClickListener {
+public class GameroomActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String roomId, player,id;
+    String roomId, player,id,userID;
     TextView roomIdTV, playerTV,playersList,statusTV, playerConTV ;
-    DatabaseReference myRef,myRef_selection,myRef_initial, myRef_exit,myRef_players, myRef_players_full;
+    DatabaseReference myRef_initial, myRef_exit,myRef_players, myRef_players_full;
     FirebaseAuth fAuth;
-    String userID;
-    String update_key;
     ImageView imageView;
     Button exitgameBtn,newPlayer, scanQR,go;
     public final static int QRcodeWidth = 500 ;
@@ -64,7 +65,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
 
         exitgameBtn.setOnClickListener(this);
         mContext = getApplicationContext();
-        mActivity = gameRoom.this;
+        mActivity = GameroomActivity.this;
 
         System.out.println(id);
         Bundle extra = getIntent().getExtras();
@@ -89,7 +90,6 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                         myRef_players.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                gameroom_model grlist = new gameroom_model();
                                 ArrayList<Player_model> Players= new ArrayList<Player_model>();
 
                                 Players=snapshot.getValue(gameroom_model.class).getPlayers();
@@ -148,7 +148,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(gameRoom.this, MapsActivity.class);
+                Intent intent = new Intent(GameroomActivity.this, MapsActivity.class);
                 intent.putExtra("room_id",roomId);
                 startActivity(intent);
             }
@@ -213,11 +213,11 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        myRef_exit.removeValue();
                                         Toast.makeText(mContext,"Game Room Closed Successfully ! ",Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                         finish();
+                                     //   myRef_exit.removeValue();
                                     }
                                 });
 
@@ -225,7 +225,6 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         // Do something when want to stay in the app
-//                Toast.makeText(mContext,"thank you",Toast.LENGTH_LONG).show();
                                     }
                                 });
 
@@ -290,7 +289,7 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
     public void onBackPressed(){
 
         final gameroom_model gr_exit = new gameroom_model();
-        myRef_exit = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(update_key);
+        myRef_exit = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id);
         myRef_exit.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
@@ -307,11 +306,12 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                myRef_exit.removeValue();
                                 Toast.makeText(mContext,"Game Room Closed Successfully ! ",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
+                               // myRef_exit.removeValue();
+
                             }
                         });
 
@@ -319,7 +319,6 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // Do something when want to stay in the app
-//                Toast.makeText(mContext,"thank you",Toast.LENGTH_LONG).show();
                             }
                         });
 
@@ -354,7 +353,6 @@ public class gameRoom extends AppCompatActivity implements View.OnClickListener 
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // Do something when want to stay in the app
-//                Toast.makeText(mContext,"thank you",Toast.LENGTH_LONG).show();
                             }
                         });
 

@@ -30,20 +30,20 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activities.MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".ScannerView" />
-        <activity android:name=".gameRoom" />
-        <activity android:name=".activity_register" />
-        <activity android:name=".activity_login">
+        <activity android:name=".utils.ScannerView" />
+        <activity android:name=".activities.GameroomActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

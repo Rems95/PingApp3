@@ -5,7 +5,7 @@
     android:id="@+id/scanQr"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gameRoom">
+    tools:context=".activities.GameroomActivity">
 
     <Button
         android:id="@+id/goToMaps"

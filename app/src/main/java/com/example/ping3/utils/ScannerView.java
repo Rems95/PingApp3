@@ -1,4 +1,4 @@
-package com.example.ping3;
+package com.example.ping3.utils;
 
 import android.Manifest;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ping3.activities.GameroomActivity;
+import com.example.ping3.models.Player_model;
+import com.example.ping3.models.gameroom_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -84,7 +87,7 @@ public class ScannerView extends AppCompatActivity implements ZXingScannerView.R
                                         if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomidx))) {
                                             gameroom_model gr_update = ds.getValue(gameroom_model.class);
                                             if ((gr_update.getCreator()).equals(userID)) {
-                                                Intent intent = new Intent(getApplicationContext(), gameRoom.class);
+                                                Intent intent = new Intent(getApplicationContext(), GameroomActivity.class);
                                                 intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
                                                 intent.putExtra("player",player.getPseudo() );
                                                 intent.putExtra("id",update_key);
@@ -96,7 +99,7 @@ public class ScannerView extends AppCompatActivity implements ZXingScannerView.R
                                                 gr_update.addPlayers(player);
                                                 System.out.println("Player:"+player);
                                                 myRef_update.setValue(gr_update);
-                                                Intent intent = new Intent(getApplicationContext(), gameRoom.class);
+                                                Intent intent = new Intent(getApplicationContext(), GameroomActivity.class);
                                                 intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
                                                 intent.putExtra("player",player.getPseudo() );
                                                 intent.putExtra("id",update_key);
