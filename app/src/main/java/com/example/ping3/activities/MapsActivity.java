@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,12 +45,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     FirebaseAuth fAuth;
     Player_model player = new Player_model();
     String room_id;
-    TimerReceiver timerReceiver=null;
+    TimerReceiver timerReceiver = null;
     boolean isMouse = false;
     double lastX = 0;
     double lastY = 0;
-
-
 
 
     @Override
@@ -67,17 +66,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         room_id = intent.getStringExtra("room_id");
-        if (intent.getStringExtra("Mouse") != null){
-            if (intent.getStringExtra("Mouse").equals("yes")){
+        if (intent.getStringExtra("Mouse") != null) {
+            if (intent.getStringExtra("Mouse").equals("yes")) {
                 isMouse = true;
             }
         }
-        if(intent.getDoubleExtra("lastX",0) != 0 &&
-                intent.getDoubleExtra("lastY",0) != 0){
-            lastX = intent.getDoubleExtra("lastX",0);
-            lastY = intent.getDoubleExtra("lastY",0);
+        if (intent.getDoubleExtra("lastX", 0) != 0 &&
+                intent.getDoubleExtra("lastY", 0) != 0) {
+            lastX = intent.getDoubleExtra("lastX", 0);
+            lastY = intent.getDoubleExtra("lastY", 0);
         }
         initTimeReceiver();
 
@@ -100,6 +99,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         //LatLng sydney = new LatLng(-34, 151);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
 
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);

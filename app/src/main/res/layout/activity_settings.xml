@@ -14,90 +14,113 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="center">
 
             <TextView
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="GAME SETTINGS"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                android:id="@+id/timeTitle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="50dp"
-                android:paddingVertical="8dp">
+                android:layout_marginStart="51dp"
+                android:layout_marginLeft="51dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="2dp"
+                android:text="Time"
+                app:layout_constraintBottom_toBottomOf="@+id/timeSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/timeSpinner"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/timeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Time" />
-
-                <Spinner
-                    android:id="@+id/timeSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Spinner>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/timeSpinner"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="50dp"
-                android:paddingVertical="8dp">
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/timeTitle"
+                app:layout_constraintTop_toTopOf="parent"></Spinner>
 
-                <TextView
-                    android:id="@+id/numberofplayers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Number of Players" />
 
-                <Spinner
-                    android:id="@+id/numberofplayersSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Spinner>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/numberofplayers"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="50dp"
-                android:paddingVertical="8dp">
+                android:layout_marginStart="51dp"
+                android:layout_marginLeft="51dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="2dp"
+                android:text="Number of Players"
+                app:layout_constraintBottom_toBottomOf="@+id/numberofplayersSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/numberofplayersSpinner"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Game Level" />
+            <Spinner
+                android:id="@+id/numberofplayersSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/numberofplayers"
+                app:layout_constraintTop_toBottomOf="@+id/timeSpinner"></Spinner>
 
-                <Spinner
-                    android:id="@+id/levelSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Spinner>
-            </LinearLayout>
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="51dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="2dp"
+                android:text="Game Level"
+                app:layout_constraintBottom_toBottomOf="@+id/levelSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/levelSpinner"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Spinner
+                android:id="@+id/levelSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/level"
+                app:layout_constraintTop_toBottomOf="@+id/numberofplayersSpinner"></Spinner>
 
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save" />
+                android:layout_marginTop="50dp"
+                android:background="@drawable/custombuttonblackoval"
+                android:text="Save"
+                android:textColor="#ffffff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/level" />
 
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
