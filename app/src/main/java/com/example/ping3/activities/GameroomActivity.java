@@ -148,8 +148,11 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GameroomActivity.this, MapsActivity.class);
+                Intent intent = new Intent(GameroomActivity.this, GameViewActivity.class);
                 intent.putExtra("room_id",roomId);
+                if(player.equals("MOUSE")){
+                    intent.putExtra("Mouse","yes");
+                }
                 startActivity(intent);
             }
         });

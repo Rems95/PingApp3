@@ -5,7 +5,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,12 +39,15 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         GoogleMap.OnMyLocationClickListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Location mLastLocation;
     private FirebaseAnalytics mFirebaseAnalytics;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     FirebaseAuth fAuth;
     Player_model player = new Player_model();
     String room_id;
+    TimerReceiver timerReceiver=null;
+    boolean isMouse = false;
+    double lastX = 0;
+    double lastY = 0;
 
 
 
@@ -51,6 +57,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         super.onCreate(savedInstanceState);
         ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        fAuth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -62,8 +69,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
 
         Intent intent =getIntent();
         room_id = intent.getStringExtra("room_id");
-        addPlayer();
-        getDeviceLocation();
+        if (intent.getStringExtra("Mouse") != null){
+            if (intent.getStringExtra("Mouse").equals("yes")){
+                isMouse = true;
+            }
+        }
+        if(intent.getDoubleExtra("lastX",0) != 0 &&
+                intent.getDoubleExtra("lastY",0) != 0){
+            lastX = intent.getDoubleExtra("lastX",0);
+            lastY = intent.getDoubleExtra("lastY",0);
+        }
+        initTimeReceiver();
 
     }
 
@@ -88,19 +104,78 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
+        if (lastX != 0 && lastY != 0){
+            LatLng pin = new LatLng(lastX, lastY);
+            mMap.addMarker(new MarkerOptions().position(pin));
+        }
     }
 
     @Override
     public boolean onMyLocationButtonClick() {
-        getDeviceLocation();
-        getOthersPosition();
+
         return false;
     }
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        getDeviceLocation();
 
+    }
+
+
+
+
+    public void getOthersPosition(){
+        mMap.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final double[] x = new double[1];
+        final double[] y = new double[1];
+        float zoomLevel = 15.0f;
+
+        db.collection("player").whereEqualTo("Room_id",room_id).whereNotEqualTo("UID",fAuth.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Toast.makeText(MapsActivity.this,"OK",Toast.LENGTH_SHORT).show();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                x[0] = Double.parseDouble(document.getData().get("X").toString());
+                                y[0] = Double.parseDouble(document.getData().get("Y").toString());
+                                LatLng pin = new LatLng(x[0], y[0]);
+                                mMap.addMarker(new MarkerOptions().position(pin));
+                            }
+                        } else {
+                            Toast.makeText(MapsActivity.this,"Error getting documents."+task.getException(),Toast.LENGTH_LONG).show();
+                            Log.w("TAG111", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void getMousePosition(){
+        mMap.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final double[] x = new double[1];
+        final double[] y = new double[1];
+        float zoomLevel = 15.0f;
+        db.collection("player").whereEqualTo("Room_id",room_id).whereNotEqualTo("isMouse",false)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Toast.makeText(MapsActivity.this,"OK",Toast.LENGTH_SHORT).show();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                x[0] = Double.parseDouble(document.getData().get("X").toString());
+                                y[0] = Double.parseDouble(document.getData().get("Y").toString());
+                                LatLng pin = new LatLng(x[0], y[0]);
+                                mMap.addMarker(new MarkerOptions().position(pin));
+                            }
+                        } else {
+                            Toast.makeText(MapsActivity.this,"Error getting documents."+task.getException(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     private void getDeviceLocation(){
@@ -115,8 +190,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                         Location currentLocation = (Location)task.getResult();
                         //Toast.makeText(MapsActivity.this,"Current location is"+currentLocation.getLongitude()+","+currentLocation.getLatitude(),Toast.LENGTH_SHORT).show();
                         UpdatePosition(currentLocation.getLatitude(),currentLocation.getLongitude());
-                        LatLng pin = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pin, zoomLevel));
                     } else{
                         Toast.makeText(MapsActivity.this,"Current location is null",Toast.LENGTH_SHORT).show();
                     }
@@ -125,28 +198,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         }catch (SecurityException e){
             Toast.makeText(this, "SecurityException :"+ e.getMessage(), Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void addPlayer(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        fAuth = FirebaseAuth.getInstance();
-        // Create a new user with a first and last name
-        player.setPlayer_id(fAuth.getUid());
-        player.setEmail(fAuth.getCurrentUser().getEmail());
-
-
-
-        player.setPseudo("New Player");
-
-        Map<String, Object> user = new HashMap<>();
-        user.put("UID", player.getPlayer_id());
-        user.put("Email", player.getEmail());
-        user.put("Pseudo", player.getPseudo());
-        user.put("Room_id",room_id);
-
-        db.collection("player").document(player.getEmail()).set(user);
-
-
     }
 
     public void UpdatePosition(double x,double y){
@@ -158,34 +209,28 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
 
     }
 
-    public void getOthersPosition(){
-        mMap.clear();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final double[] x = new double[1];
-        final double[] y = new double[1];
-        float zoomLevel = 15.0f;
+    //TimerReceiver
+    public class TimerReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String intentAction = intent.getAction();
+            if (intentAction.equals("com.demo.timer")) {
+                int time = intent.getIntExtra("time", 0);
+                if(time % 5 == 0 && isMouse){
+                    getOthersPosition();
+                }
+                if(time % 30 == 0 && !isMouse ){
+                    getMousePosition();
+                }
 
-        db.collection("player").whereEqualTo("Room_id",room_id).whereNotEqualTo("UID",player.getPlayer_id())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            //Toast.makeText(MapsActivity.this,"OK",Toast.LENGTH_SHORT).show();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                x[0] = Double.parseDouble(document.getData().get("X").toString());
-                                y[0] = Double.parseDouble(document.getData().get("Y").toString());
-                                LatLng pin = new LatLng(x[0], y[0]);
-                                mMap.addMarker(new MarkerOptions().position(pin));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pin, zoomLevel));
-                                //Toast.makeText(MapsActivity.this,"x"+document.getData().get("X"),Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
-                            }
-                        } else {
-                            Toast.makeText(MapsActivity.this,"Error getting documents."+task.getException(),Toast.LENGTH_LONG).show();
-                            Log.w("TAG111", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+    public void initTimeReceiver(){
+        timerReceiver = new TimerReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.demo.timer");
+        registerReceiver(timerReceiver, filter);
     }
 }
