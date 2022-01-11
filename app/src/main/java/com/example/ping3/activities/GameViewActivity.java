@@ -13,6 +13,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import java.util.Map;
 
 
 /**
- * fail to add components in the Mapsactivity
+ * fail to add components in the Maps activity
  * so this game view activity is created
  * we can add boussole here
  * and chat room, skills, Time etc.
@@ -56,6 +57,10 @@ public class GameViewActivity extends AppCompatActivity {
     Player_model player = new Player_model();
     double lastX = 0;
     double lastY = 0;
+    int endHideTime = 0;
+    boolean startHide = false;
+    Button button_hide;
+
 
 
     @Override
@@ -88,19 +93,41 @@ public class GameViewActivity extends AppCompatActivity {
                 int time = intent.getIntExtra("time", 0);
                 timer_tv.setText(timeCalculate(timeSetted*60 -time));
                 if((timeSetted*60 - time) == 0){
+                    //Stop service
+                    stopService(new Intent(GameViewActivity.this, TimerService.class));
+                    unregisterReceiver(timerReceiver);
+                    timerReceiver=null;
                     Toast.makeText(getApplicationContext(),"The room is over",Toast.LENGTH_SHORT).show();
-                    Intent home = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
                     startActivity(home);
                 }
-
                 if ( time % 2 == 0 && time != 0){
-                    getDeviceLocation();
+                    if (isMouse){
+                        if(startHide){
+                            if (endHideTime == 0){
+                                endHideTime = time +10;
+                                UpdatePosition(0,0);
+                                button_hide.setEnabled(false);
+                            }
+                            else if(endHideTime > time){
+                                UpdatePosition(0,0);
+                            }
+                            else{
+                                startHide =false;
+                                getDeviceLocation();
+                            }
+                        }
+                        else{
+                            getDeviceLocation();
+                        }
+                    }
+                    else{
+                        getDeviceLocation();
+                    }
                 }
-
                 if(time % 5 == 0 && isMouse){
                     getOthersPosition();
                 }
-
                 if(time % 30 ==0 && !isMouse){
                     getMousePosition();
                 }
@@ -112,6 +139,7 @@ public class GameViewActivity extends AppCompatActivity {
     public void OnButtonGoToMapClicked(View view){
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra("room_id",room_id);
+        intent.putExtra("time",timeSetted);
         if (isMouse){
             intent.putExtra("Mouse","yes");
         }
@@ -133,15 +161,16 @@ public class GameViewActivity extends AppCompatActivity {
         startService(new Intent(this, TimerService.class));
     }
 
-   public void OnButtonStopClicked(View view){
-       //Stop service
-       stopService(new Intent(this, TimerService.class));
-       unregisterReceiver(timerReceiver);
-       timerReceiver=null;
-   }
+    public void OnButtonStopClicked(View view){
+        //Stop service
+        stopService(new Intent(this, TimerService.class));
+        unregisterReceiver(timerReceiver);
+        timerReceiver=null;
+    }
 
 
     public void initView(){
+        button_hide = (Button)findViewById(R.id.button_hide_position);
         timer_tv = (TextView) findViewById(R.id.Timer);
     }
 
@@ -257,6 +286,10 @@ public class GameViewActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void onHideMousePositionClicked(View view){
+        startHide = true;
     }
 
 }
