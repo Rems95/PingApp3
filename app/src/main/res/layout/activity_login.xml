@@ -41,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
-
             android:layout_marginEnd="40dp"
             android:hint="Email" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,6 +67,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
             android:hint="Password"
+            android:fontFamily="@font/chewy"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,6 +94,7 @@
         android:layout_marginTop="14dp"
         android:text="New User ? Create an Account"
         android:textSize="18sp"
+        android:fontFamily="@font/chewy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="Forgot Password ?"
+        android:fontFamily="@font/chewy"
         app:layout_constraintBottom_toTopOf="@+id/log_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,12 +133,13 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="50dp"
-        android:fontFamily="@font/damion"
+        android:fontFamily="@font/chewy"
         android:text="Chat Salom"
         android:textColor="#000000"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

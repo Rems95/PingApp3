@@ -8,16 +8,31 @@
     android:background="@color/colorPrimary"
     tools:context=".activities.RegisterActivity">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="269dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/chewy"
+        android:gravity="center"
+        android:text="Chat Salom"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="219dp"
-        android:layout_height="203dp"
+        android:layout_width="142dp"
+        android:layout_height="119dp"
         android:contentDescription="serviceforyoulogo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo_chat_2" />
 
@@ -41,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
-
+            android:textSize="20sp"
             android:layout_marginEnd="40dp"
             android:hint="Email" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -67,8 +82,11 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
+            android:fontFamily="@font/chewy"
+            android:textSize="20sp"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -93,6 +111,8 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
+            android:fontFamily="@font/chewy"
+            android:textSize="20sp"
             android:hint="Confirm Password"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -106,21 +126,29 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/custombuttonblackoval"
+        android:fontFamily="@font/chewy"
         android:text="Register"
         android:textColor="#ffffff"
+
+        android:textSize="30sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reg_confirmpwd_out"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.099"
+
+        />
 
     <TextView
         android:id="@+id/reg_Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/chewy"
         android:text="Already Registered? Login Here"
-        android:textSize="18sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

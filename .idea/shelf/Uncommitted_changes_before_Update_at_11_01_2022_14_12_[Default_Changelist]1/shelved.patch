@@ -1,0 +1,231 @@
+Index: app/src/main/res/layout/activity_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:background=\"@color/colorPrimary\"\n    tools:context=\".activities.LoginActivity\">\n\n\n    <ImageView\n        android:id=\"@+id/logo\"\n        android:layout_width=\"174dp\"\n        android:layout_height=\"148dp\"\n        android:contentDescription=\"serviceforyoulogo\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/textView3\"\n        app:layout_constraintVertical_bias=\"0.0\"\n        app:srcCompat=\"@drawable/logo_chat_2\" />\n\n\n    <com.google.android.material.textfield.TextInputLayout\n        android:id=\"@+id/log_email_out\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n\n        android:layout_margin=\"10dp\"\n        app:errorEnabled=\"true\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.157\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/logo\"\n        app:layout_constraintVertical_bias=\"0.047\">\n\n        <com.google.android.material.textfield.TextInputEditText\n            android:id=\"@+id/log_email\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\"\n            android:layout_marginStart=\"40dp\"\n            android:layout_marginTop=\"40dp\"\n\n            android:layout_marginEnd=\"40dp\"\n            android:hint=\"Email\" />\n    </com.google.android.material.textfield.TextInputLayout>\n\n    <com.google.android.material.textfield.TextInputLayout\n        android:id=\"@+id/log_password_out\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n\n        android:layout_margin=\"10dp\"\n        app:errorEnabled=\"true\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/log_email_out\"\n        app:layout_constraintVertical_bias=\"0.0\">\n\n        <com.google.android.material.textfield.TextInputEditText\n            android:id=\"@+id/log_password\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\"\n            android:layout_marginStart=\"40dp\"\n            android:layout_marginTop=\"40dp\"\n            android:layout_marginEnd=\"40dp\"\n            android:hint=\"Password\"\n            android:inputType=\"textPassword\" />\n    </com.google.android.material.textfield.TextInputLayout>\n\n\n    <Button\n        android:id=\"@+id/log_button\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"50dp\"\n        android:layout_marginTop=\"20dp\"\n        android:layout_marginEnd=\"50dp\"\n        android:background=\"@drawable/custombuttonblackoval\"\n        android:text=\"Login\"\n        android:textColor=\"#ffffff\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"1.0\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/log_password_out\" />\n\n    <TextView\n        android:id=\"@+id/log_Register\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"14dp\"\n        android:text=\"New User ? Create an Account\"\n        android:textSize=\"18sp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.497\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/log_button\" />\n\n    <ProgressBar\n        android:id=\"@+id/log_progress\"\n        style=\"?android:attr/progressBarStyle\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:visibility=\"invisible\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.498\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/log_Register\"\n        app:layout_constraintVertical_bias=\"0.724\" />\n\n    <TextView\n        android:id=\"@+id/log_forgotpassword\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"14dp\"\n        android:text=\"Forgot Password ?\"\n        app:layout_constraintBottom_toTopOf=\"@+id/log_progress\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/log_Register\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/textView3\"\n        android:layout_width=\"269dp\"\n        android:layout_height=\"72dp\"\n        android:layout_marginStart=\"50dp\"\n        android:layout_marginTop=\"48dp\"\n        android:layout_marginEnd=\"50dp\"\n        android:fontFamily=\"@font/damion\"\n        android:text=\"Chat Salom\"\n        android:textColor=\"#000000\"\n        android:textSize=\"48sp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login.xml b/app/src/main/res/layout/activity_login.xml
+--- a/app/src/main/res/layout/activity_login.xml	(revision 5502fb089b22b522f51bca56ed942a3f44e42af2)
++++ b/app/src/main/res/layout/activity_login.xml	(date 1641904963586)
+@@ -41,7 +41,7 @@
+             android:layout_height="wrap_content"
+             android:layout_marginStart="40dp"
+             android:layout_marginTop="40dp"
+-
++            android:fontFamily="@font/damion"
+             android:layout_marginEnd="40dp"
+             android:hint="Email" />
+     </com.google.android.material.textfield.TextInputLayout>
+@@ -68,6 +68,7 @@
+             android:layout_marginTop="40dp"
+             android:layout_marginEnd="40dp"
+             android:hint="Password"
++            android:fontFamily="@font/damion"
+             android:inputType="textPassword" />
+     </com.google.android.material.textfield.TextInputLayout>
+ 
+@@ -94,6 +95,7 @@
+         android:layout_marginTop="14dp"
+         android:text="New User ? Create an Account"
+         android:textSize="18sp"
++        android:fontFamily="@font/damion"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.497"
+         app:layout_constraintStart_toStartOf="parent"
+@@ -118,6 +120,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginTop="14dp"
+         android:text="Forgot Password ?"
++        android:fontFamily="@font/damion"
+         app:layout_constraintBottom_toTopOf="@+id/log_progress"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+@@ -137,6 +140,7 @@
+         android:textSize="48sp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
++        app:layout_constraintTop_toTopOf="parent"
++        android:gravity="center"/>
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_game_room.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:id=\"@+id/scanQr\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:background=\"@color/colorPrimary\"\n    tools:context=\".activities.GameroomActivity\">\n\n    <Button\n        android:id=\"@+id/goToMaps\"\n        android:layout_width=\"100dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"100dp\"\n        android:background=\"@drawable/custombuttongreyoval\"\n        android:text=\"Go\"\n        android:textColor=\"#000000\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.498\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/textView2\" />\n\n    <TextView\n        android:id=\"@+id/playersList\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"17dp\"\n        android:fontFamily=\"@font/capriola\"\n        android:text=\"TextView\"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"28sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/imageView2\"\n        app:layout_constraintVertical_bias=\"0.015\" />\n\n    <TextView\n        android:id=\"@+id/textView\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"30dp\"\n        android:layout_marginTop=\"65dp\"\n        android:fontFamily=\"@font/coustard\"\n        android:text=\"Room ID : \"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"27sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/roomIdTV\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"10dp\"\n        android:layout_marginTop=\"65dp\"\n        android:fontFamily=\"@font/coustard\"\n        android:text=\"TextView\"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"27sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toEndOf=\"@+id/textView\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/playerTV\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"15dp\"\n        android:fontFamily=\"@font/capriola\"\n        android:text=\"TextView\"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"28sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/textView4\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"30dp\"\n        android:layout_marginTop=\"108dp\"\n        android:fontFamily=\"@font/coustard\"\n        android:text=\"Status : \"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"25sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/statusTV\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"3dp\"\n        android:layout_marginTop=\"115dp\"\n        android:fontFamily=\"@font/coustard\"\n        android:text=\"TextView\"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"18sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toEndOf=\"@+id/textView4\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/textView2\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"30dp\"\n        android:layout_marginTop=\"150dp\"\n        android:fontFamily=\"@font/coustard\"\n        android:text=\"Players Connected : \"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"24sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <TextView\n        android:id=\"@+id/playersConTV\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"3dp\"\n        android:layout_marginTop=\"150dp\"\n        android:fontFamily=\"@font/coustard\"\n        android:text=\"TextView\"\n        android:textAppearance=\"@style/TextAppearance.AppCompat.Large\"\n        android:textSize=\"24sp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toEndOf=\"@+id/textView2\"\n        app:layout_constraintTop_toTopOf=\"parent\"\n        app:layout_constraintVertical_bias=\"0.0\" />\n\n    <Button\n        android:id=\"@+id/exitgameBtn\"\n        android:layout_width=\"100dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginBottom=\"20dp\"\n        android:background=\"@drawable/custombuttongreyoval\"\n        android:text=\"Exit Game\"\n        android:textColor=\"#000000\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.498\"\n        app:layout_constraintStart_toStartOf=\"parent\" />\n\n    <Button\n        android:id=\"@+id/newPlayer\"\n        android:layout_width=\"100dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"50dp\"\n        android:layout_marginTop=\"40dp\"\n        android:background=\"@drawable/custombuttongreyoval\"\n        android:text=\"Add Player\"\n        android:textColor=\"#000000\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/textView2\" />\n\n    <Button\n        android:id=\"@+id/scanQR\"\n        android:layout_width=\"100dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"40dp\"\n        android:layout_marginEnd=\"50dp\"\n        android:background=\"@drawable/custombuttongreyoval\"\n        android:text=\"Scan QR\"\n        android:textColor=\"#000000\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/textView2\" />\n\n    <ImageView\n        android:id=\"@+id/imageView2\"\n        android:layout_width=\"186dp\"\n        android:layout_height=\"141dp\"\n        android:layout_marginTop=\"30dp\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/goToMaps\"\n        app:srcCompat=\"?attr/selectableItemBackground\" />\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_game_room.xml b/app/src/main/res/layout/activity_game_room.xml
+--- a/app/src/main/res/layout/activity_game_room.xml	(revision 5502fb089b22b522f51bca56ed942a3f44e42af2)
++++ b/app/src/main/res/layout/activity_game_room.xml	(date 1641904963594)
+@@ -26,7 +26,7 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="17dp"
+-        android:fontFamily="@font/capriola"
++        android:fontFamily="@font/damion"
+         android:text="TextView"
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="28sp"
+@@ -42,7 +42,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginStart="30dp"
+         android:layout_marginTop="65dp"
+-        android:fontFamily="@font/coustard"
++        android:fontFamily="@font/damion"
+         android:text="Room ID : "
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="27sp"
+@@ -59,7 +59,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginStart="10dp"
+         android:layout_marginTop="65dp"
+-        android:fontFamily="@font/coustard"
++        android:fontFamily="@font/damion"
+         android:text="TextView"
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="27sp"
+@@ -75,7 +75,7 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="15dp"
+-        android:fontFamily="@font/capriola"
++        android:fontFamily="@font/damion"
+         android:text="TextView"
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="28sp"
+@@ -91,7 +91,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginStart="30dp"
+         android:layout_marginTop="108dp"
+-        android:fontFamily="@font/coustard"
++        android:fontFamily="@font/damion"
+         android:text="Status : "
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="25sp"
+@@ -108,7 +108,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginStart="3dp"
+         android:layout_marginTop="115dp"
+-        android:fontFamily="@font/coustard"
++        android:fontFamily="@font/damion"
+         android:text="TextView"
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="18sp"
+@@ -125,7 +125,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginStart="30dp"
+         android:layout_marginTop="150dp"
+-        android:fontFamily="@font/coustard"
++        android:fontFamily="@font/damion"
+         android:text="Players Connected : "
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="24sp"
+@@ -142,7 +142,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginStart="3dp"
+         android:layout_marginTop="150dp"
+-        android:fontFamily="@font/coustard"
++        android:fontFamily="@font/damion"
+         android:text="TextView"
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:textSize="24sp"
+Index: app/src/main/res/values/preloaded_fonts.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n    <array name=\"preloaded_fonts\" translatable=\"false\">\n        <item>@font/capriola</item>\n        <item>@font/coustard</item>\n        <item>@font/damion</item>\n    </array>\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/preloaded_fonts.xml b/app/src/main/res/values/preloaded_fonts.xml
+--- a/app/src/main/res/values/preloaded_fonts.xml	(revision 5502fb089b22b522f51bca56ed942a3f44e42af2)
++++ b/app/src/main/res/values/preloaded_fonts.xml	(date 1641904963591)
+@@ -1,8 +1,8 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <resources>
+     <array name="preloaded_fonts" translatable="false">
+-        <item>@font/capriola</item>
+-        <item>@font/coustard</item>
++        <item>@font/damion</item>
++        <item>@font/damion</item>
+         <item>@font/damion</item>
+     </array>
+ </resources>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"DesignSurface\">\n    <option name=\"filePathToZoomLevelMap\">\n      <map>\n        <entry key=\"..\\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_settings.xml\" value=\"0.3333333333333333\" />\n        <entry key=\"..\\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_room.xml\" value=\"0.42857142857142855\" />\n        <entry key=\"..\\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_view.xml\" value=\"0.2857142857142857\" />\n        <entry key=\"..\\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_view2.xml\" value=\"0.18645833333333334\" />\n        <entry key=\"..\\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_login.xml\" value=\"0.18645833333333334\" />\n        <entry key=\"..\\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_main.xml\" value=\"0.42857142857142855\" />\n        <entry key=\"..\\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_maps.xml\" value=\"0.42857142857142855\" />\n        <entry key=\"..\\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_register.xml\" value=\"0.18645833333333334\" />\n        <entry key=\"..\\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/drawable/custombuttonblackoval.xml\" value=\"0.12604166666666666\" />\n        <entry key=\"..\\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_login.xml\" value=\"0.10625\" />\n        <entry key=\"..\\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_register.xml\" value=\"0.10625\" />\n        <entry key=\"app/src/main/res/drawable-v24/ic_launcher_foreground.xml\" value=\"0.20052083333333334\" />\n        <entry key=\"app/src/main/res/layout/activity_game_room.xml\" value=\"0.165\" />\n        <entry key=\"app/src/main/res/layout/activity_game_view.xml\" value=\"0.18125\" />\n        <entry key=\"app/src/main/res/layout/activity_login.xml\" value=\"0.26358695652173914\" />\n        <entry key=\"app/src/main/res/layout/activity_main.xml\" value=\"0.165\" />\n        <entry key=\"app/src/main/res/layout/activity_maps.xml\" value=\"0.184375\" />\n        <entry key=\"app/src/main/res/layout/activity_register.xml\" value=\"0.25\" />\n        <entry key=\"app/src/main/res/layout/activity_settings.xml\" value=\"0.25\" />\n      </map>\n    </option>\n  </component>\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\" />\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 5502fb089b22b522f51bca56ed942a3f44e42af2)
++++ b/.idea/misc.xml	(date 1641905153502)
+@@ -15,10 +15,11 @@
+         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_login.xml" value="0.10625" />
+         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_register.xml" value="0.10625" />
+         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20052083333333334" />
++        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.20052083333333334" />
+         <entry key="app/src/main/res/layout/activity_game_room.xml" value="0.165" />
+         <entry key="app/src/main/res/layout/activity_game_view.xml" value="0.18125" />
+         <entry key="app/src/main/res/layout/activity_login.xml" value="0.26358695652173914" />
+-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
++        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.184375" />
+         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
+         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AndroidLayouts\">\n    <shared>\n      <config>\n        <device id=\"pixel\" />\n        <device id=\"pixel_c\" />\n      </config>\n    </shared>\n  </component>\n  <component name=\"AndroidLogFilters\">\n    <option name=\"TOOL_WINDOW_CONFIGURED_FILTER\" value=\"No Filters\" />\n    <option name=\"TOOL_WINDOW_REGEXP_FILTER\" value=\"false\" />\n  </component>\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"NONE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"64d94bf2-03e3-4c48-b694-6ed2502f9c83\" name=\"Default Changelist\" comment=\"Design\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"device_and_snapshot_combo_box_target[/Users/christophefischer/.android/avd/Pixel_4_API_29.avd]\" />\n  <component name=\"ExternalProjectsData\">\n    <projectState path=\"$PROJECT_DIR$\">\n      <ProjectState />\n    </projectState>\n  </component>\n  <component name=\"ExternalProjectsManager\">\n    <system id=\"GRADLE\">\n      <state>\n        <projects_view>\n          <tree_state>\n            <expand>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Ping3\" type=\"f1a62948:ProjectNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Ping3\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Ping3\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\n                <item name=\"Dependencies\" type=\"6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode\" />\n              </path>\n            </expand>\n            <select />\n          </tree_state>\n        </projects_view>\n      </state>\n    </system>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n    <option name=\"RESET_MODE\" value=\"HARD\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"ProjectId\" id=\"222rpsVDpw7pIkSuxkSg4nSLeVa\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"dart.analysis.tool.window.visible\" value=\"false\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n    <property name=\"project.structure.last.edited\" value=\"Modules\" />\n    <property name=\"project.structure.proportion\" value=\"0.17\" />\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\" />\n    <property name=\"show.do.not.copy.http.proxy.settings.to.gradle\" value=\"true\" />\n    <property name=\"show.migrate.to.gradle.popup\" value=\"false\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"android.template.1131515043\">\n      <recent name=\"com.example.ping3\" />\n    </key>\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\K-chan\\Desktop\\3\\Rock_Paper_Scissors_Android_Application\\app\\src\\main\\java\\com\\example\\rps\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/app/src/main/res/drawable\" />\n      <recent name=\"C:\\Users\\K-chan\\Desktop\\3\\Rock_Paper_Scissors_Android_Application\\app\\src\\main\\res\\drawable\" />\n    </key>\n    <key name=\"android.template.108651176\">\n      <recent name=\"com.example.ping3.activities\" />\n    </key>\n    <key name=\"android.template.-614367638\">\n      <recent name=\"com.example.ping3\" />\n    </key>\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\n      <recent name=\"com.example.rps\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"app\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\" activateToolWindowBeforeRun=\"false\">\n      <module name=\"Ping3.app\" />\n      <option name=\"DEPLOY\" value=\"true\" />\n      <option name=\"DEPLOY_APK_FROM_BUNDLE\" value=\"false\" />\n      <option name=\"DEPLOY_AS_INSTANT\" value=\"false\" />\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\n      <option name=\"ALL_USERS\" value=\"false\" />\n      <option name=\"ALWAYS_INSTALL_WITH_PM\" value=\"false\" />\n      <option name=\"DYNAMIC_FEATURES_DISABLED_LIST\" value=\"\" />\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\n      <option name=\"MODE\" value=\"default_activity\" />\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\n      <option name=\"SKIP_NOOP_APK_INSTALLATIONS\" value=\"true\" />\n      <option name=\"FORCE_STOP_RUNNING_APP\" value=\"true\" />\n      <option name=\"TARGET_SELECTION_MODE\" value=\"DEVICE_AND_SNAPSHOT_COMBO_BOX\" />\n      <option name=\"SELECTED_CLOUD_MATRIX_CONFIGURATION_ID\" value=\"-1\" />\n      <option name=\"SELECTED_CLOUD_MATRIX_PROJECT_ID\" value=\"\" />\n      <option name=\"DEBUGGER_TYPE\" value=\"Auto\" />\n      <Auto>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Auto>\n      <Hybrid>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Hybrid>\n      <Java />\n      <Native>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Native>\n      <Profilers>\n        <option name=\"ADVANCED_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_CPU_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_CPU_PROFILING_CONFIGURATION_NAME\" value=\"Sample Java Methods\" />\n        <option name=\"STARTUP_NATIVE_MEMORY_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"NATIVE_MEMORY_SAMPLE_RATE_BYTES\" value=\"2048\" />\n      </Profilers>\n      <option name=\"DEEP_LINK\" value=\"\" />\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\n      <option name=\"SEARCH_ACTIVITY_IN_GLOBAL_SCOPE\" value=\"false\" />\n      <option name=\"SKIP_ACTIVITY_VALIDATION\" value=\"false\" />\n      <method v=\"2\" />\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"64d94bf2-03e3-4c48-b694-6ed2502f9c83\" name=\"Default Changelist\" comment=\"\" />\n      <created>1639046709006</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1639046709006</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"maps activities integrer HUANG &amp; YUAN &amp; LU\">\n      <created>1641227069578</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641227069578</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Correction des bugs\">\n      <created>1641779343998</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641779343998</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Restructuration du projet\">\n      <created>1641782353365</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641782353365</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Ajout de layout\">\n      <created>1641823559467</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641823559467</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Ajout des fichiers &quot;logo&quot;\">\n      <created>1641824890352</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641824890352</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Ajout des fichiers &quot;logo&quot;\">\n      <created>1641824951156</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641824951156</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"Design\">\n      <created>1641829578732</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641829578732</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"Design\">\n      <created>1641850265051</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1641850265051</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"9\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\n                <map>\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"maps activities integrer HUANG &amp; YUAN &amp; LU\" />\n    <MESSAGE value=\"Correction des bugs\" />\n    <MESSAGE value=\"Restructuration du projet\" />\n    <MESSAGE value=\"Ajout de layout\" />\n    <MESSAGE value=\"Ajout des fichiers &quot;logo&quot;\" />\n    <MESSAGE value=\"Design\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Design\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 5502fb089b22b522f51bca56ed942a3f44e42af2)
++++ b/.idea/workspace.xml	(date 1641905854858)
+@@ -16,7 +16,14 @@
+     <option name="autoReloadType" value="NONE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="64d94bf2-03e3-4c48-b694-6ed2502f9c83" name="Default Changelist" comment="Design" />
++    <list default="true" id="64d94bf2-03e3-4c48-b694-6ed2502f9c83" name="Default Changelist" comment="Design + permission in mapActivity">
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/logo_souris.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_game_room.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_game_room.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/preloaded_fonts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/preloaded_fonts.xml" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -238,7 +245,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1641850265051</updated>
+     </task>
+-    <option name="localTasksCounter" value="9" />
++    <task id="LOCAL-00009" summary="Design + permission in mapActivity">
++      <created>1641850350096</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1641850350096</updated>
++    </task>
++    <option name="localTasksCounter" value="10" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -266,6 +280,7 @@
+     <MESSAGE value="Ajout de layout" />
+     <MESSAGE value="Ajout des fichiers &quot;logo&quot;" />
+     <MESSAGE value="Design" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Design" />
++    <MESSAGE value="Design + permission in mapActivity" />
++    <option name="LAST_COMMIT_MESSAGE" value="Design + permission in mapActivity" />
+   </component>
+ </project>
+\ No newline at end of file

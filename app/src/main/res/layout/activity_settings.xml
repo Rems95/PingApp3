@@ -24,8 +24,9 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/chewy"
                 android:text="GAME SETTINGS"
-                android:textColor="@color/colorPrimaryDark"
+                android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,14 +37,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="51dp"
-                android:layout_marginLeft="51dp"
                 android:layout_marginEnd="1dp"
-                android:layout_marginRight="1dp"
                 android:layout_marginBottom="2dp"
                 android:text="Time"
+
                 app:layout_constraintBottom_toBottomOf="@+id/timeSpinner"
                 app:layout_constraintEnd_toStartOf="@+id/timeSpinner"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                app:layout_constraintVertical_bias="0.896" />
 
             <Spinner
                 android:id="@+id/timeSpinner"
@@ -51,10 +53,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="48dp"
-                android:layout_marginRight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/timeTitle"
-                app:layout_constraintTop_toTopOf="parent"></Spinner>
+                app:layout_constraintTop_toBottomOf="@+id/textView5"></Spinner>
 
 
             <TextView
@@ -62,25 +63,24 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="51dp"
-                android:layout_marginLeft="51dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="1dp"
-                android:layout_marginRight="1dp"
                 android:layout_marginBottom="2dp"
                 android:text="Number of Players"
                 app:layout_constraintBottom_toBottomOf="@+id/numberofplayersSpinner"
                 app:layout_constraintEnd_toStartOf="@+id/numberofplayersSpinner"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeTitle" />
 
             <Spinner
                 android:id="@+id/numberofplayersSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginEnd="48dp"
-                android:layout_marginRight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/numberofplayers"
-                app:layout_constraintTop_toBottomOf="@+id/timeSpinner"></Spinner>
+                app:layout_constraintTop_toBottomOf="@+id/timeTitle"></Spinner>
 
 
             <TextView
@@ -88,12 +88,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="51dp"
+                android:layout_marginTop="21dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="2dp"
                 android:text="Game Level"
                 app:layout_constraintBottom_toBottomOf="@+id/levelSpinner"
                 app:layout_constraintEnd_toStartOf="@+id/levelSpinner"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/numberofplayers" />
 
             <Spinner
                 android:id="@+id/levelSpinner"
@@ -101,20 +103,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="48dp"
-                android:layout_marginRight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/level"
-                app:layout_constraintTop_toBottomOf="@+id/numberofplayersSpinner"></Spinner>
+                app:layout_constraintTop_toBottomOf="@+id/numberofplayers"></Spinner>
 
 
             <Button
                 android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="173dp"
+                android:layout_height="53dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/custombuttonblackoval"
+                android:fontFamily="@font/chewy"
                 android:text="Save"
                 android:textColor="#ffffff"
+                android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"

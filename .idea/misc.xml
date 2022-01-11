@@ -15,12 +15,19 @@
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_login.xml" value="0.10625" />
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_register.xml" value="0.10625" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20052083333333334" />
-        <entry key="app/src/main/res/layout/activity_game_room.xml" value="0.335" />
+        <entry key="app/src/main/res/drawable/custombuttonblackoval.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/drawable/custombuttonbluestroke.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/drawable/custombuttongreyoval.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/drawable/custombuttonsilveroval.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/drawable/custombuttonyellowoval.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.20052083333333334" />
+        <entry key="app/src/main/res/layout/activity_game_room.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_game_view.xml" value="0.18125" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.26358695652173914" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
       </map>
     </option>
   </component>
