@@ -13,15 +13,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64d94bf2-03e3-4c48-b694-6ed2502f9c83" name="Default Changelist" comment="is OK to update others' position for both cat(every 30s for test ) and mouse(every2s)&#10;chat room and bousole can be coded on the game_view_activity&#10;-----HUANG &amp;YUAN">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_01_2022_20_37__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_01_2022_20_37__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_14_12__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_14_12__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="64d94bf2-03e3-4c48-b694-6ed2502f9c83" name="Default Changelist" comment="Add a skill for mouse----hide his position&#10;-----YUAN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/GameViewActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/GameViewActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/utils/TimerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/utils/TimerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_game_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_game_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +73,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="222rpsVDpw7pIkSuxkSg4nSLeVa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -237,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641829578732</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add a skill for mouse----hide his position&#10;-----YUAN">
+      <created>1641915481461</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1641915481461</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -266,6 +269,7 @@
     <MESSAGE value="Ajout des fichiers &quot;logo&quot;" />
     <MESSAGE value="Design" />
     <MESSAGE value="is OK to update others' position for both cat(every 30s for test ) and mouse(every2s)&#10;chat room and bousole can be coded on the game_view_activity&#10;-----HUANG &amp;YUAN" />
-    <option name="LAST_COMMIT_MESSAGE" value="is OK to update others' position for both cat(every 30s for test ) and mouse(every2s)&#10;chat room and bousole can be coded on the game_view_activity&#10;-----HUANG &amp;YUAN" />
+    <MESSAGE value="Add a skill for mouse----hide his position&#10;-----YUAN" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a skill for mouse----hide his position&#10;-----YUAN" />
   </component>
 </project>
