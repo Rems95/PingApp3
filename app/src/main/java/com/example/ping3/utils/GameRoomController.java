@@ -61,16 +61,25 @@ public class GameRoomController {
                                                 player.setPseudo("Cat");
                                                 if(gr_update.getPlayers().size()<gr_update.getNbPlayers()){
                                                 gr_update.addPlayers(player);
+                                                    System.out.println("Player:"+player);
+                                                    myRef_update.setValue(gr_update);
+                                                    Intent intent = new Intent(context, GameroomActivity.class);
+                                                    intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
+                                                    intent.putExtra("player",player.getPseudo() );
+                                                    intent.putExtra("id",update_key);
+                                                    context.startActivity(intent);
                                                 }else{
                                                     Toast.makeText(context,"The room is full",Toast.LENGTH_SHORT).show();
+                                                    Intent home = new Intent(context, MainActivity.class);
+                                                    context.startActivity(home);
                                                 }
-                                                System.out.println("Player:"+player);
-                                                myRef_update.setValue(gr_update);
-                                                Intent intent = new Intent(context, GameroomActivity.class);
-                                                intent.putExtra("roomId", String.valueOf(gr_update.getRoomId()));
-                                                intent.putExtra("player",player.getPseudo() );
-                                                intent.putExtra("id",update_key);
-                                                context.startActivity(intent);
+                                                if(gr_update.getLevel().equals("EASY")){
+
+                                                }else if(gr_update.getLevel().equals("MEDIUM")){
+
+                                                }else if(gr_update.getLevel().equals("DIFICULT")){
+
+                                                }
 
                                             }
                                         }
@@ -85,7 +94,6 @@ public class GameRoomController {
                             }
 
                         }
-
 
                     }
                     else{

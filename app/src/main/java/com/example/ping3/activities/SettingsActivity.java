@@ -73,6 +73,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());
                 int nbPlayers = Integer.parseInt(nbPlayersSpinner.getSelectedItem().toString());
+                String level = levelSpinner.getSelectedItem().toString();
                 final int roomId = genRoomid();
                 System.out.println(FirebaseDatabase.getInstance().getReference());
                 myRef = FirebaseDatabase.getInstance().getReference().child("gameRoom");
@@ -87,6 +88,8 @@ public class SettingsActivity extends AppCompatActivity {
                         gr_push.setStatus(1);
                         gr_push.setRoomId(roomId);
                         gr_push.setNbPlayers(nbPlayers);
+                        gr_push.setTime(time);
+                        gr_push.setLevel(level);
                         gr_push.addPlayers(player);
                         myRef.push().setValue(gr_push);
 
@@ -95,6 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
                         intent.putExtra("player",player.getPseudo());
                         intent.putExtra("time",time);
                         intent.putExtra("nbPlayers",nbPlayers);
+                        intent.putExtra("level",level);
                         intent.putExtra("id",id);
                         startActivity(intent);
                     }

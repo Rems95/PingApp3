@@ -35,6 +35,7 @@ import java.util.ArrayList;
 public class GameroomActivity extends AppCompatActivity implements View.OnClickListener {
 
     String roomId, player,id,userID;
+    int time;
     TextView roomIdTV, playerTV,playersList,statusTV, playerConTV ;
     DatabaseReference myRef_initial, myRef_exit,myRef_players, myRef_players_full;
     FirebaseAuth fAuth;
@@ -74,6 +75,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
 
             roomId = extra.getString("roomId");
             player = extra.getString("player");
+            time = extra.getInt("time");
             roomIdTV.setText(roomId);
             playerTV.setText(player);
 
@@ -153,6 +155,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                 if(player.equals("MOUSE")){
                     intent.putExtra("Mouse","yes");
                 }
+                intent.putExtra("time",time);
                 startActivity(intent);
             }
         });

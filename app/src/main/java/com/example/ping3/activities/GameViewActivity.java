@@ -49,6 +49,7 @@ public class GameViewActivity extends AppCompatActivity {
     TimerReceiver timerReceiver=null;
     String room_id;
     String Mouse = null;
+    int timeSetted;
     boolean isMouse = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     FirebaseAuth fAuth;
@@ -65,9 +66,10 @@ public class GameViewActivity extends AppCompatActivity {
         initView();
         initTimeReceiver();
         //startService(new Intent(this, TimerService.class));
-        Intent intent =getIntent();
-        room_id = intent.getStringExtra("room_id");
-        Mouse = intent.getStringExtra("Mouse");
+        Bundle extra = getIntent().getExtras();
+        room_id = extra.getString("room_id");
+        Mouse = extra.getString("Mouse");
+        timeSetted = extra.getInt("time");
         if(Mouse != null){
             if (Mouse.equals("yes")){
                 isMouse = true;
@@ -84,7 +86,12 @@ public class GameViewActivity extends AppCompatActivity {
             String intentAction = intent.getAction();
             if (intentAction.equals("com.demo.timer")) {
                 int time = intent.getIntExtra("time", 0);
-                timer_tv.setText(timeCalculate(3600-time));
+                timer_tv.setText(timeCalculate(timeSetted*60 -time));
+                if((timeSetted*60 - time) == 0){
+                    Toast.makeText(getApplicationContext(),"The room is over",Toast.LENGTH_SHORT).show();
+                    Intent home = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(home);
+                }
 
                 if ( time % 2 == 0 && time != 0){
                     getDeviceLocation();
