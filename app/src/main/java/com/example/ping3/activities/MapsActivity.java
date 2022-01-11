@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.ping3.models.Player_model;
 import com.example.ping3.R;
+import com.example.ping3.utils.TimerService;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,6 +50,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     boolean isMouse = false;
     double lastX = 0;
     double lastY = 0;
+    int timeSetted;
 
 
     @Override
@@ -68,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
 
         Intent intent = getIntent();
         room_id = intent.getStringExtra("room_id");
+        timeSetted = intent.getIntExtra("time",60);
         if (intent.getStringExtra("Mouse") != null) {
             if (intent.getStringExtra("Mouse").equals("yes")) {
                 isMouse = true;
@@ -226,6 +229,14 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
             String intentAction = intent.getAction();
             if (intentAction.equals("com.demo.timer")) {
                 int time = intent.getIntExtra("time", 0);
+
+                if((timeSetted*60 - time) == 0){
+                    stopTimer();
+                    Toast.makeText(getApplicationContext(),"The room is over",Toast.LENGTH_SHORT).show();
+                    Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
+                    startActivity(home);
+                }
+
                 if(time % 5 == 0 && isMouse){
                     getOthersPosition();
                 }
@@ -243,4 +254,12 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         filter.addAction("com.demo.timer");
         registerReceiver(timerReceiver, filter);
     }
+
+    public void stopTimer(){
+        //Stop service
+        stopService(new Intent(MapsActivity.this, TimerService.class));
+        unregisterReceiver(timerReceiver);
+        timerReceiver=null;
+    }
+
 }

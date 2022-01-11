@@ -34,7 +34,6 @@ public class TimerService extends Service {
             };
             timer.schedule(timerTask,0,1000);
         }
-
     }
     @Override
     public void onDestroy() {
