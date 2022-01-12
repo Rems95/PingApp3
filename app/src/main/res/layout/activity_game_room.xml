@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/goToMaps"
-        android:layout_width="105dp"
-        android:layout_height="91dp"
+        android:layout_width="113dp"
+        android:layout_height="77dp"
         android:layout_marginTop="136dp"
         android:background="@drawable/custombuttongreyoval"
         android:fontFamily="@font/chewy"
@@ -173,22 +173,22 @@
 
     <Button
         android:id="@+id/newPlayer"
-        android:layout_width="139dp"
-        android:layout_height="98dp"
+        android:layout_width="113dp"
+        android:layout_height="77dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/custombuttongreyoval"
+        android:fontFamily="@font/chewy"
         android:text="Add Player"
         android:textColor="#000000"
-        android:fontFamily="@font/chewy"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/scanQR"
-        android:layout_width="139dp"
-        android:layout_height="98dp"
+        android:layout_width="113dp"
+        android:layout_height="77dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/custombuttongreyoval"
