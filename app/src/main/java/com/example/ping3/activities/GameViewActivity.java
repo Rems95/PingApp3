@@ -22,12 +22,8 @@ import com.example.ping3.models.Player_model;
 import com.example.ping3.utils.TimerService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -48,7 +44,7 @@ public class GameViewActivity extends AppCompatActivity {
 
     TextView timer_tv;
     TimerReceiver timerReceiver=null;
-    String room_id;
+    String room_id,id;
     String Mouse = null;
     int timeSetted;
     boolean isMouse = false;
@@ -59,7 +55,7 @@ public class GameViewActivity extends AppCompatActivity {
     double lastY = 0;
     int endHideTime = 0;
     boolean startHide = false;
-    Button button_hide;
+    Button button_hide,chatbutton;
 
 
 
@@ -68,11 +64,14 @@ public class GameViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityCompat.requestPermissions(GameViewActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         setContentView(R.layout.activity_game_view);
+        chatbutton=findViewById(R.id.chat_button);
+
         initView();
         initTimeReceiver();
         //startService(new Intent(this, TimerService.class));
         Bundle extra = getIntent().getExtras();
         room_id = extra.getString("room_id");
+        id = extra.getString("id");
         Mouse = extra.getString("Mouse");
         timeSetted = extra.getInt("time");
         if(Mouse != null){
@@ -80,8 +79,18 @@ public class GameViewActivity extends AppCompatActivity {
                 isMouse = true;
             }
         }
+
         addPlayer();
         getDeviceLocation();
+        chatbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     //TimerReceiver
@@ -170,7 +179,7 @@ public class GameViewActivity extends AppCompatActivity {
 
 
     public void initView(){
-        button_hide = (Button)findViewById(R.id.button_hide_position);
+        button_hide = (Button)findViewById(R.id.chat_button);
         timer_tv = (TextView) findViewById(R.id.Timer);
     }
 

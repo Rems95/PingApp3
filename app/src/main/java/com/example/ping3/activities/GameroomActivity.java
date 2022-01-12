@@ -152,6 +152,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View v) {
                 Intent intent = new Intent(GameroomActivity.this, GameViewActivity.class);
                 intent.putExtra("room_id",roomId);
+                intent.putExtra("id",id);
                 if(player.equals("MOUSE")){
                     intent.putExtra("Mouse","yes");
                 }
