@@ -25,6 +25,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -44,7 +46,7 @@ public class GameViewActivity extends AppCompatActivity {
 
     TextView timer_tv;
     TimerReceiver timerReceiver=null;
-    String room_id,id;
+    String room_id,id,pseudo;
     String Mouse = null;
     int timeSetted;
     boolean isMouse = false;
@@ -72,6 +74,8 @@ public class GameViewActivity extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         room_id = extra.getString("room_id");
         id = extra.getString("id");
+        pseudo = extra.getString("pseudo");
+        System.out.println("Pseudo"+pseudo);
         Mouse = extra.getString("Mouse");
         timeSetted = extra.getInt("time");
         if(Mouse != null){
@@ -85,8 +89,10 @@ public class GameViewActivity extends AppCompatActivity {
         chatbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent =new Intent(getApplicationContext(), ChatActivity.class);
                 intent.putExtra("id",id);
+                intent.putExtra("pseudo",pseudo);
                 startActivity(intent);
                 finish();
             }

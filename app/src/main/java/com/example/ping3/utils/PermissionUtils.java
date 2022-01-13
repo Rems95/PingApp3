@@ -19,10 +19,7 @@ public class PermissionUtils {
         return result == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static boolean hasReadPermission(Context context) {
-        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
+
 
     public static boolean hasAudioRecordPermission(Context context){
         int result = ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO);

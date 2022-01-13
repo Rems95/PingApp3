@@ -194,12 +194,15 @@ public class ChatAdapter extends ArrayAdapter<Message> {
         } else {
             Log.w("Chat", "Wrong type of message");
         }
-
+        String pseudo = (String) message.getSenderPseudo();
+        TextView pseudoView=(TextView)convertView.findViewById(R.id.chat_user);
+        pseudoView.setText(pseudo);
         TextView dateView = (TextView) convertView.findViewById(R.id.chat_date);
         String dateText = dateFormat.format(message.getDate());
         dateView.setText(dateText);
 
         RelativeLayout.LayoutParams dateViewParams = (RelativeLayout.LayoutParams) dateView.getLayoutParams();
+        RelativeLayout.LayoutParams pseudoViewParams = (RelativeLayout.LayoutParams) pseudoView.getLayoutParams();
 
         if (message.getSenderId().equals(user.getUid())) {
             mainViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -207,6 +210,9 @@ public class ChatAdapter extends ArrayAdapter<Message> {
 
             dateViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             dateViewParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+
+            pseudoViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            pseudoViewParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
 
             abstractView.setBackgroundResource(R.drawable.rounded_corner_sent);
 
@@ -216,6 +222,8 @@ public class ChatAdapter extends ArrayAdapter<Message> {
 
             dateViewParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             dateViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            pseudoViewParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            pseudoViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
 
             abstractView.setBackgroundResource(R.drawable.rounded_corner_received);
         }

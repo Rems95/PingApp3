@@ -29,9 +29,9 @@ public class FileUtils {
             return file;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
 
         }
+        return null;
 
     }
 }

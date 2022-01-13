@@ -30,13 +30,18 @@ import androidx.core.content.FileProvider;
 import com.example.ping3.utils.FileUtils;
 import com.example.ping3.utils.ImageUtils;
 import com.example.ping3.utils.PermissionUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -97,6 +102,7 @@ public class ChatActivity extends AppCompatActivity {
     };
     private String imagePath;
     private String imageUrl;
+    private String pseudo;
     private Uri imageUri;
     private Bitmap resizedImage;
     private ImageButton messageAtachImageButton;
@@ -171,6 +177,9 @@ public class ChatActivity extends AppCompatActivity {
         messages = new ArrayList<>();
         Bundle extra = getIntent().getExtras();
         id1 = extra.getString("id");
+        pseudo = extra.getString("pseudo");
+        System.out.println("pseudo"+pseudo);
+        System.out.println("id1"+id1);
 
 
         FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id1).child("userMessages").child("messages")
@@ -224,6 +233,7 @@ public class ChatActivity extends AppCompatActivity {
 
         newMessage.setDate(new Date());
         newMessage.setSenderId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        newMessage.setSenderPseudo(pseudo);
 
         String id = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id1).child("userMessages").child("messages").push().getKey();
 
@@ -309,7 +319,7 @@ public class ChatActivity extends AppCompatActivity {
         if (!isAndroidVersionNew || PermissionUtils.hasCameraPermission(this) ||
                 PermissionUtils.hasWritePermission(this)) {
             Intent takePhotoIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
+            System.out.println(getApplicationContext().getPackageName() + ".my.package.name.provider");
             imageUri = FileProvider.getUriForFile(this,
                     getApplicationContext().getPackageName() + ".my.package.name.provider",
                     FileUtils.createFileWithExtension("jpg"));
@@ -480,15 +490,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    private String getConversationId(String partnerId) {
-        String myId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        if (myId.compareTo(partnerId) < 0) {
-            return myId + "-" + partnerId;
-        } else {
-            return partnerId + "-" + myId;
-        }
-    }
 
     private void hideProgressBar() {
         progressBar.setVisibility(View.GONE);

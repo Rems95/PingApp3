@@ -19,12 +19,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ping3.models.Player_model;
 import com.example.ping3.R;
 import com.example.ping3.models.gameroom_model;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -34,7 +39,7 @@ import java.util.ArrayList;
 
 public class GameroomActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String roomId, player,id,userID;
+    String roomId, player,id,userID,pseudo;
     int time;
     TextView roomIdTV, playerTV,playersList,statusTV, playerConTV ;
     DatabaseReference myRef_initial, myRef_exit,myRef_players, myRef_players_full;
@@ -118,6 +123,21 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+            if (fAuth.getCurrentUser() != null) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference usersRef = db.collection("users").document(fAuth.getCurrentUser().getUid());
+                usersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                pseudo = (String) document.get("pseudo");
+                            }
+                        }
+                    }
+                });
+            }
         }
 
         newPlayer.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +172,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View v) {
                 Intent intent = new Intent(GameroomActivity.this, GameViewActivity.class);
                 intent.putExtra("room_id",roomId);
+                intent.putExtra("pseudo",pseudo);
                 intent.putExtra("id",id);
                 if(player.equals("MOUSE")){
                     intent.putExtra("Mouse","yes");

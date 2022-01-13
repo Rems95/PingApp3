@@ -22,15 +22,21 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextInputEditText email,password,confirmpwd;
+    TextInputEditText email,password,confirmpwd,pseudo;
     Button register;
-    TextView alrlogin,guest;
+    TextView alrlogin;
     FirebaseAuth fAuth;
     ProgressBar progressbar;
+    FirebaseFirestore db;
+
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -54,9 +60,11 @@ public class RegisterActivity extends AppCompatActivity {
         confirmpwd = findViewById(R.id.reg_confirmpwd);
         register = findViewById(R.id.reg_button);
         alrlogin = findViewById(R.id.reg_Login);
-
+        pseudo=findViewById(R.id.reg_pseudo);
         fAuth = FirebaseAuth.getInstance();
         progressbar = findViewById(R.id.reg_progress);
+        db = FirebaseFirestore.getInstance();
+
 
         alrlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             String mPassword = password.getText().toString().trim();
 
-            String mCPassword = confirmpwd.getText().toString().trim();
+            String pseudonyme = pseudo.getText().toString();
 
             email.setText("");
             email.setHint("Email");
@@ -109,6 +117,9 @@ public class RegisterActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
 
                         FirebaseUser user = fAuth.getCurrentUser();
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("pseudo", "" + pseudonyme);
+                        db.collection("users").document(user.getUid().toString()).set(map);
                         user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

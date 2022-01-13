@@ -13,6 +13,7 @@ public class Message {
 
     private String id;
     private String senderId;
+    private String senderPseudo;
     private Date date;
     private Type type;
 
@@ -61,5 +62,13 @@ public class Message {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getSenderPseudo() {
+        return senderPseudo;
+    }
+
+    public void setSenderPseudo(String senderPseudo) {
+        this.senderPseudo = senderPseudo;
     }
 }
