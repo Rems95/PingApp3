@@ -1,9 +1,5 @@
 package com.example.ping3.activities;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,13 +11,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ping3.models.Player_model;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import com.example.ping3.R;
+import com.example.ping3.models.Player_model;
+import com.example.ping3.models.gameroom_model;
 import com.example.ping3.utils.TimerService;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -32,12 +34,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,15 +58,18 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     Player_model player = new Player_model();
     String room_id,id,pseudo;
     TimerReceiver timerReceiver = null;
+    String Mouse = null;
     boolean isMouse = false;
-    double lastX = 0;
-    double lastY = 0;
     int timeSetted;
     FloatingActionButton floatingActionButton;
     private BottomSheetBehavior mBottomSheetBehavior1;
     LinearLayout tapactionlayout;
     View white_forground_view;
     View bottomSheet;
+    TextView timer_tv;
+    int endHideTime = 0;
+    boolean startHide = false;
+    DatabaseReference myRef_initial;
 
 
     @Override
@@ -68,78 +78,16 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         fAuth = FirebaseAuth.getInstance();
-        Bundle extra = getIntent().getExtras();
-        id = extra.getString("id");
-        pseudo = extra.getString("pseudo");
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.chat);
-        tapactionlayout = (LinearLayout) findViewById(R.id.tap_action_layout);
-        bottomSheet = findViewById(R.id.bottom_sheet1);
-        mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet);
-        mBottomSheetBehavior1.setPeekHeight(120);
-        mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        mBottomSheetBehavior1.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    tapactionlayout.setVisibility(View.VISIBLE);
-                }
-
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    tapactionlayout.setVisibility(View.GONE);
-                }
-
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                    tapactionlayout.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
-
-        tapactionlayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mBottomSheetBehavior1.getState()==BottomSheetBehavior.STATE_COLLAPSED)
-                {
-                    mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
-            }
-        });
-
-
-        mapFragment.getMapAsync(this);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(), ChatActivity.class);
-                intent.putExtra("id",id);
-                intent.putExtra("pseudo",pseudo);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        Intent intent = getIntent();
-        room_id = intent.getStringExtra("room_id");
-        timeSetted = intent.getIntExtra("time",60);
-        if (intent.getStringExtra("Mouse") != null) {
-            if (intent.getStringExtra("Mouse").equals("yes")) {
-                isMouse = true;
-            }
-        }
-        if (intent.getDoubleExtra("lastX", 0) != 0 &&
-                intent.getDoubleExtra("lastY", 0) != 0) {
-            lastX = intent.getDoubleExtra("lastX", 0);
-            lastY = intent.getDoubleExtra("lastY", 0);
-        }
+        initLayout();
+        initView();
+        getExtra();
         initTimeReceiver();
+        addPlayer();
+        getDeviceLocation();
+
+
+        //startTimer();
 
     }
 
@@ -156,10 +104,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -175,10 +119,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
-        if (lastX != 0 && lastY != 0){
-            LatLng pin = new LatLng(lastX, lastY);
-            mMap.addMarker(new MarkerOptions().position(pin));
-        }
+
     }
 
     @Override
@@ -287,19 +228,47 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
             String intentAction = intent.getAction();
             if (intentAction.equals("com.demo.timer")) {
                 int time = intent.getIntExtra("time", 0);
+                timer_tv.setText(timeCalculate(timeSetted*60 -time));
+                if (time != 0){
+                    if((timeSetted*60 - time) == 0){
+                        stopTimer();
+                        unregisterReceiver(timerReceiver);
+                        timerReceiver=null;
+                        Toast.makeText(getApplicationContext(),"The room is over",Toast.LENGTH_SHORT).show();
+                        Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
+                        startActivity(home);
+                    }
 
-                if((timeSetted*60 - time) == 0){
-                    stopTimer();
-                    Toast.makeText(getApplicationContext(),"The room is over",Toast.LENGTH_SHORT).show();
-                    Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
-                    startActivity(home);
-                }
+                    if(time % 5 == 0 && isMouse){
+                        getOthersPosition();
+                    }
+                    if(time % 30 == 0 && !isMouse ){
+                        getMousePosition();
+                    }
+                    if(time % 3 == 0){
+                        if (isMouse){
+                            if(startHide){
+                                if (endHideTime == 0){
+                                    endHideTime = time +10;
+                                    UpdatePosition(0,0);
+                                }
+                                else if(endHideTime > time){
+                                    UpdatePosition(0,0);
+                                }
+                                else{
+                                    startHide =false;
+                                    getDeviceLocation();
+                                }
+                            }
+                            else{
+                                getDeviceLocation();
+                            }
+                        }
+                        else{
+                            getDeviceLocation();
+                        }
+                    }
 
-                if(time % 5 == 0 && isMouse){
-                    getOthersPosition();
-                }
-                if(time % 30 == 0 && !isMouse ){
-                    getMousePosition();
                 }
 
             }
@@ -313,6 +282,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         registerReceiver(timerReceiver, filter);
     }
 
+    public void startTimer(){
+        if(timerReceiver==null){
+            timerReceiver = new TimerReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("com.demo.timer");
+            registerReceiver(timerReceiver, filter);
+        }
+        //start timer service
+        startService(new Intent(getApplicationContext(), TimerService.class));
+    }
+
     public void stopTimer(){
         //Stop service
         stopService(new Intent(MapsActivity.this, TimerService.class));
@@ -320,4 +300,117 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         timerReceiver=null;
     }
 
+    public void getExtra(){
+        Bundle extra = getIntent().getExtras();
+        room_id = extra.getString("room_id");
+        id = extra.getString("id");
+        pseudo = extra.getString("pseudo");
+        System.out.println("Pseudo"+pseudo);
+        Mouse = extra.getString("Mouse");
+        timeSetted = extra.getInt("time");
+        if(Mouse != null){
+            if (Mouse.equals("yes")){
+                isMouse = true;
+            }
+        }
+    }
+    public void initLayout(){
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.chat);
+        tapactionlayout = (LinearLayout) findViewById(R.id.tap_action_layout);
+        bottomSheet = findViewById(R.id.bottom_sheet1);
+        mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior1.setPeekHeight(120);
+        mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mBottomSheetBehavior1.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    tapactionlayout.setVisibility(View.VISIBLE);
+                }
+
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    tapactionlayout.setVisibility(View.GONE);
+                }
+
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    tapactionlayout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        tapactionlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mBottomSheetBehavior1.getState()==BottomSheetBehavior.STATE_COLLAPSED)
+                {
+                    mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+            }
+        });
+
+
+        mapFragment.getMapAsync(this);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("pseudo",pseudo);
+                startActivity(intent);
+            }
+        });
+    }
+    public void initView(){
+        timer_tv = (TextView) findViewById(R.id.time_tv);
+    }
+
+    public String timeCalculate(int s){
+        int m = 0;
+        m = s/60;
+        s = s - (m*60);
+        return m+" : "+String.format("%02d",s);
+    }
+
+    public void addPlayer(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
+        // Create a new user with a first and last name
+        player.setPlayer_id(fAuth.getUid());
+        player.setEmail(fAuth.getCurrentUser().getEmail());
+        player.setPseudo("New Player");
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("UID", player.getPlayer_id());
+        user.put("Email", player.getEmail());
+        user.put("Pseudo", player.getPseudo());
+        user.put("Room_id",room_id);
+        user.put("isMouse",isMouse);
+
+        db.collection("player").document(player.getEmail()).set(user);
+    }
+
+    public void getTime(){
+        myRef_initial = FirebaseDatabase.getInstance().getReference().child("gameRoom");
+        myRef_initial.child(id).child("time").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    timeSetted = Integer. parseInt(String.valueOf(task.getResult().getValue()));
+                    Log.d("firebase111", String.valueOf(task.getResult().getValue()));
+                }
+            }
+        });
+
+    }
 }

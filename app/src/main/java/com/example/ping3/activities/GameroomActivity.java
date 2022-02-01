@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ping3.models.Player_model;
 import com.example.ping3.R;
 import com.example.ping3.models.gameroom_model;
+import com.example.ping3.utils.TimerService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -170,7 +171,8 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GameroomActivity.this, GameViewActivity.class);
+                startService(new Intent(getApplicationContext(), TimerService.class));
+                Intent intent = new Intent(GameroomActivity.this, MapsActivity.class);
                 intent.putExtra("room_id",roomId);
                 intent.putExtra("pseudo",pseudo);
                 intent.putExtra("id",id);
