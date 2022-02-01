@@ -13,6 +13,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ping3.models.Player_model;
@@ -27,6 +29,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,12 +49,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     private FusedLocationProviderClient mFusedLocationProviderClient;
     FirebaseAuth fAuth;
     Player_model player = new Player_model();
-    String room_id;
+    String room_id,id,pseudo;
     TimerReceiver timerReceiver = null;
     boolean isMouse = false;
     double lastX = 0;
     double lastY = 0;
     int timeSetted;
+    FloatingActionButton floatingActionButton;
+    private BottomSheetBehavior mBottomSheetBehavior1;
+    LinearLayout tapactionlayout;
+    View white_forground_view;
+    View bottomSheet;
 
 
     @Override
@@ -59,14 +68,63 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         fAuth = FirebaseAuth.getInstance();
-
+        Bundle extra = getIntent().getExtras();
+        id = extra.getString("id");
+        pseudo = extra.getString("pseudo");
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.chat);
+        tapactionlayout = (LinearLayout) findViewById(R.id.tap_action_layout);
+        bottomSheet = findViewById(R.id.bottom_sheet1);
+        mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior1.setPeekHeight(120);
+        mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mBottomSheetBehavior1.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    tapactionlayout.setVisibility(View.VISIBLE);
+                }
+
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    tapactionlayout.setVisibility(View.GONE);
+                }
+
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    tapactionlayout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        tapactionlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mBottomSheetBehavior1.getState()==BottomSheetBehavior.STATE_COLLAPSED)
+                {
+                    mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+            }
+        });
+
+
         mapFragment.getMapAsync(this);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("pseudo",pseudo);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         room_id = intent.getStringExtra("room_id");

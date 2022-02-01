@@ -57,7 +57,7 @@ public class GameViewActivity extends AppCompatActivity {
     double lastY = 0;
     int endHideTime = 0;
     boolean startHide = false;
-    Button button_hide,chatbutton;
+    Button button_hide;
 
 
 
@@ -66,7 +66,6 @@ public class GameViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityCompat.requestPermissions(GameViewActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         setContentView(R.layout.activity_game_view);
-        chatbutton=findViewById(R.id.chat_button);
 
         initView();
         initTimeReceiver();
@@ -86,17 +85,7 @@ public class GameViewActivity extends AppCompatActivity {
 
         addPlayer();
         getDeviceLocation();
-        chatbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent =new Intent(getApplicationContext(), ChatActivity.class);
-                intent.putExtra("id",id);
-                intent.putExtra("pseudo",pseudo);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     //TimerReceiver
@@ -155,6 +144,8 @@ public class GameViewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra("room_id",room_id);
         intent.putExtra("time",timeSetted);
+        intent.putExtra("pseudo",pseudo);
+        intent.putExtra("id",id);
         if (isMouse){
             intent.putExtra("Mouse","yes");
         }
