@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item
+            android:id="@+id/normal"
+            android:icon="@android:drawable/btn_star_big_on"
+            android:title="@string/normal"
+            app:showAsAction="ifRoom">
+        </item>
+
+
+        <item
+            android:id="@+id/dark"
+            android:icon="@drawable/googleg_standard_color_18"
+            android:title="@string/dark_theme"
+            app:showAsAction="never">
+        </item>
+
+        <item
+            android:id="@+id/light"
+            android:icon="@drawable/googleg_standard_color_18"
+            android:title="@string/light_theme"
+            app:showAsAction="never">
+        </item>
+
+
+</menu>

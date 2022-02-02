@@ -6,15 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -28,6 +34,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,11 +55,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLocationButtonClickListener,
+public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Toolbar myToolbar;
     private FirebaseAnalytics mFirebaseAnalytics;
+    private static final String TAG = "MapActivity";
     private FusedLocationProviderClient mFusedLocationProviderClient;
     FirebaseAuth fAuth;
     Player_model player = new Player_model();
@@ -85,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         initTimeReceiver();
         addPlayer();
         getDeviceLocation();
-
+        displayActionBar();
 
         //startTimer();
 
@@ -378,7 +387,83 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         s = s - (m*60);
         return m+" : "+String.format("%02d",s);
     }
+    // Toolbar and Menus
+    public void displayActionBar()
+    {
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+    }
 
+    // Menu Options
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.themes, menu);
+        return true;
+    }
+
+    // Option selected
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+
+            case R.id.normal:
+                try {
+                    boolean success =   mMap.setMapStyle
+                            (MapStyleOptions.loadRawResourceStyle
+                                    (this,R.raw.map_style));
+                    if(!success)
+                    {  Log.d(TAG,"Styles parsing failed"); }
+                }catch (Resources.NotFoundException e)
+                {
+                    Log.d(TAG,"Styles not found",e);
+                }
+                return true;
+
+            case R.id.dark:
+                try {
+                    boolean success =   mMap.setMapStyle
+                            (MapStyleOptions.loadRawResourceStyle
+                                    (this,R.raw.night_style));
+                    if(!success)
+                    {  Log.d(TAG,"Styles parsing failed"); }
+                }catch (Resources.NotFoundException e)
+                {
+                    Log.d(TAG,"Styles not found",e);
+                }
+                return true;
+            case R.id.light:
+                try {
+                    boolean success =   mMap.setMapStyle
+                            (MapStyleOptions.loadRawResourceStyle
+                                    (this,R.raw.light_style));
+                    if(!success)
+                    {  Log.d(TAG,"Styles parsing failed"); }
+                }catch (Resources.NotFoundException e)
+                {
+                    Log.d(TAG,"Styles not found",e);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // Default Theme
+    public void normal(GoogleMap mMap){
+        try {
+            boolean success =   mMap.setMapStyle
+                    (MapStyleOptions.loadRawResourceStyle
+                            (this,R.raw.map_style));
+            if(!success)
+            {  Log.d(TAG,"Styles parsing failed"); }
+        }catch (Resources.NotFoundException e)
+        {
+            Log.d(TAG,"Styles not found",e);
+        }
+
+    }
     public void addPlayer(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
