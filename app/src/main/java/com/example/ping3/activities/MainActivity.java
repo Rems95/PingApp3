@@ -105,6 +105,19 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    public void cgu(View view){
+        startActivity(new Intent(getApplicationContext(), CguActivity.class));
+        finish();
+    }
+    public void rdg(View view){
+        startActivity(new Intent(getApplicationContext(), GameRulesActivity.class));
+        finish();
+    }
+    public void user(View view){
+        startActivity(new Intent(getApplicationContext(), UserActivity.class));
+        finish();
+    }
+
 
 
     public boolean checkroomId(int roomid , DataSnapshot dataSnapshot){
