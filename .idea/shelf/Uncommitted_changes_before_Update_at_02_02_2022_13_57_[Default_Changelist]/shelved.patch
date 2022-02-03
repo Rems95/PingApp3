@@ -1,0 +1,244 @@
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Ping3</string>\r\n    <string name=\"title_activity_maps\">MapsActivity</string>\r\n\r\n<!--Add values for spinners in the game setting-->\r\n<string-array name=\"time\">\r\n    <item>1</item>\r\n    <item>2</item>\r\n    <item>3</item>\r\n    <item>4</item>\r\n    <item>5</item>\r\n    <item>6</item>\r\n    <item>7</item>\r\n    <item>8</item>\r\n    <item>9</item>\r\n    <item>10</item>\r\n    <item>11</item>\r\n    <item>12</item>\r\n    <item>13</item>\r\n    <item>14</item>\r\n    <item>15</item>\r\n</string-array>\r\n\r\n<string-array name=\"nbplayers\">\r\n    <item>2</item>\r\n    <item>3</item>\r\n    <item>4</item>\r\n    <item>5</item>\r\n    <item>6</item>\r\n    <item>7</item>\r\n    <item>8</item>\r\n</string-array>\r\n\r\n<string-array name=\"level\">\r\n    <item>EASY</item>\r\n    <item>MEDIUM</item>\r\n    <item>DIFICULT</item>\r\n</string-array>\r\n\r\n    <style name=\"AppTheme.NoActionBar\">\r\n        <item name=\"windowActionBar\">false</item>\r\n        <item name=\"windowNoTitle\">true</item>\r\n    </style>\r\n\r\n    <style name=\"AppTheme.AppBarOverlay\" parent=\"ThemeOverlay.AppCompat.Dark.ActionBar\" />\r\n\r\n    <style name=\"AppTheme.PopupOverlay\" parent=\"ThemeOverlay.AppCompat.Light\" />\r\n</resources>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	
++++ b/app/src/main/res/values/strings.xml	
+@@ -2,40 +2,31 @@
+     <string name="app_name">Ping3</string>
+     <string name="title_activity_maps">MapsActivity</string>
+ 
+-<!--Add values for spinners in the game setting-->
+-<string-array name="time">
+-    <item>1</item>
+-    <item>2</item>
+-    <item>3</item>
+-    <item>4</item>
+-    <item>5</item>
+-    <item>6</item>
+-    <item>7</item>
+-    <item>8</item>
+-    <item>9</item>
+-    <item>10</item>
+-    <item>11</item>
+-    <item>12</item>
+-    <item>13</item>
+-    <item>14</item>
+-    <item>15</item>
+-</string-array>
++    <!--Add values for spinners in the game setting-->
++    <string-array name="time">
++        <item>5</item>
++        <item>10</item>
++        <item>15</item>
++        <item>20</item>
++        <item>25</item>
++        <item>30</item>
++    </string-array>
+ 
+-<string-array name="nbplayers">
+-    <item>2</item>
+-    <item>3</item>
+-    <item>4</item>
+-    <item>5</item>
+-    <item>6</item>
+-    <item>7</item>
+-    <item>8</item>
+-</string-array>
++    <string-array name="nbplayers">
++        <item>2</item>
++        <item>3</item>
++        <item>4</item>
++        <item>5</item>
++        <item>6</item>
++        <item>7</item>
++        <item>8</item>
++    </string-array>
+ 
+-<string-array name="level">
+-    <item>EASY</item>
+-    <item>MEDIUM</item>
+-    <item>DIFICULT</item>
+-</string-array>
++    <string-array name="level">
++        <item>EASY</item>
++        <item>MEDIUM</item>
++        <item>DIFICULT</item>
++    </string-array>
+ 
+     <style name="AppTheme.NoActionBar">
+         <item name="windowActionBar">false</item>
+@@ -45,5 +36,8 @@
+     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+ 
+     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
++
++    <string name="cgu"> CGU</string>
++    <string name="rdg"> RDG</string>
+ </resources>
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AndroidLayouts\">\r\n    <shared>\r\n      <config />\r\n    </shared>\r\n  </component>\r\n  <component name=\"AndroidLogFilters\">\r\n    <option name=\"TOOL_WINDOW_CUSTOM_FILTER\" value=\"firebase111\" />\r\n    <option name=\"TOOL_WINDOW_CONFIGURED_FILTER\" value=\"No Filters\" />\r\n    <option name=\"TOOL_WINDOW_REGEXP_FILTER\" value=\"false\" />\r\n  </component>\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"NONE\" />\r\n  </component>\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"64d94bf2-03e3-4c48-b694-6ed2502f9c83\" name=\"Default Changelist\" comment=\"Pseudo,Pseudo dans le chat\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/modules.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_01_2022_20_37__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_01_2022_20_37__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_14_12__Default_Changelist_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_14_12__Default_Changelist_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/GameroomActivity.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/GameroomActivity.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MapsActivity.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MapsActivity.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/local.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/local.properties\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"device_and_snapshot_combo_box_target[9ce642b, C:\\Users\\PC\\.android\\avd\\Nexus_6_API_30.avd]\" />\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"Ping3\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"Ping3\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"Ping3\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\r\n                <item name=\"Dependencies\" type=\"6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"HARD\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"222rpsVDpw7pIkSuxkSg4nSLeVa\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.cidr.known.project.marker\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"cidr.known.project.marker\" value=\"true\" />\r\n    <property name=\"dart.analysis.tool.window.visible\" value=\"false\" />\r\n    <property name=\"last_directory_selection\" value=\"$PROJECT_DIR$/app/src/main/res/drawable\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Project\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.17\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\" />\r\n    <property name=\"show.do.not.copy.http.proxy.settings.to.gradle\" value=\"true\" />\r\n    <property name=\"show.migrate.to.gradle.popup\" value=\"false\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"android.template.1131515043\">\r\n      <recent name=\"com.example.ping3\" />\r\n    </key>\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\res\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\res\\values\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\java\\com\\example\\ping3\\utils\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\res\\layout\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\res\\drawable\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\res\\layout\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\java\\com\\example\\ping3\\utils\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\java\\com\\example\\ping3\\models\" />\r\n      <recent name=\"C:\\Users\\karin\\Desktop\\PingApp3\\app\\src\\main\\java\\com\\example\\ping3\\activities\" />\r\n    </key>\r\n    <key name=\"android.template.108651176\">\r\n      <recent name=\"com.example.ping3.activities\" />\r\n    </key>\r\n    <key name=\"android.template.-614367638\">\r\n      <recent name=\"com.example.ping3\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.example.ping3.utils\" />\r\n      <recent name=\"com.example.rps\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"app\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\" activateToolWindowBeforeRun=\"false\">\r\n      <module name=\"Ping3.app\" />\r\n      <option name=\"DEPLOY\" value=\"true\" />\r\n      <option name=\"DEPLOY_APK_FROM_BUNDLE\" value=\"false\" />\r\n      <option name=\"DEPLOY_AS_INSTANT\" value=\"false\" />\r\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\r\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\r\n      <option name=\"ALL_USERS\" value=\"false\" />\r\n      <option name=\"ALWAYS_INSTALL_WITH_PM\" value=\"false\" />\r\n      <option name=\"DYNAMIC_FEATURES_DISABLED_LIST\" value=\"\" />\r\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\r\n      <option name=\"MODE\" value=\"default_activity\" />\r\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\r\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\r\n      <option name=\"SKIP_NOOP_APK_INSTALLATIONS\" value=\"true\" />\r\n      <option name=\"FORCE_STOP_RUNNING_APP\" value=\"true\" />\r\n      <option name=\"INSPECTION_WITHOUT_ACTIVITY_RESTART\" value=\"false\" />\r\n      <option name=\"TARGET_SELECTION_MODE\" value=\"DEVICE_AND_SNAPSHOT_COMBO_BOX\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_CONFIGURATION_ID\" value=\"-1\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_PROJECT_ID\" value=\"\" />\r\n      <option name=\"DEBUGGER_TYPE\" value=\"Auto\" />\r\n      <Auto>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n      </Auto>\r\n      <Hybrid>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n      </Hybrid>\r\n      <Java />\r\n      <Native>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n      </Native>\r\n      <Profilers>\r\n        <option name=\"ADVANCED_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_CONFIGURATION_NAME\" value=\"Sample Java Methods\" />\r\n        <option name=\"STARTUP_NATIVE_MEMORY_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"NATIVE_MEMORY_SAMPLE_RATE_BYTES\" value=\"2048\" />\r\n      </Profilers>\r\n      <option name=\"DEEP_LINK\" value=\"\" />\r\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\r\n      <option name=\"SEARCH_ACTIVITY_IN_GLOBAL_SCOPE\" value=\"false\" />\r\n      <option name=\"SKIP_ACTIVITY_VALIDATION\" value=\"false\" />\r\n      <method v=\"2\">\r\n        <option name=\"Android.Gradle.BeforeRunTask\" enabled=\"true\" goal=\"\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"64d94bf2-03e3-4c48-b694-6ed2502f9c83\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1639046709006</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1639046709006</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"maps activities integrer HUANG &amp; YUAN &amp; LU\">\r\n      <created>1641227069578</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641227069578</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Correction des bugs\">\r\n      <created>1641779343998</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641779343998</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Restructuration du projet\">\r\n      <created>1641782353365</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641782353365</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Ajout de layout\">\r\n      <created>1641823559467</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641823559467</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Ajout des fichiers &quot;logo&quot;\">\r\n      <created>1641824890352</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641824890352</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Ajout des fichiers &quot;logo&quot;\">\r\n      <created>1641824951156</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641824951156</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Design\">\r\n      <created>1641829578732</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641829578732</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Add a skill for mouse----hide his position&#10;-----YUAN\">\r\n      <created>1641915481461</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641915481461</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Add a skill for mouse----hide his position&#10;-----YUAN\">\r\n      <created>1641916299914</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641916299914</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Chat Text message operationnel.&#10;bug niveau Audio et Image pour les versions recentes d'android\">\r\n      <created>1641980117106</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641980117107</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"Pseudo,Pseudo dans le chat\">\r\n      <created>1642051582182</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1642051582182</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"12\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\r\n                <map>\r\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"maps activities integrer HUANG &amp; YUAN &amp; LU\" />\r\n    <MESSAGE value=\"Correction des bugs\" />\r\n    <MESSAGE value=\"Restructuration du projet\" />\r\n    <MESSAGE value=\"Ajout de layout\" />\r\n    <MESSAGE value=\"Ajout des fichiers &quot;logo&quot;\" />\r\n    <MESSAGE value=\"Design\" />\r\n    <MESSAGE value=\"is OK to update others' position for both cat(every 30s for test ) and mouse(every2s)&#10;chat room and bousole can be coded on the game_view_activity&#10;-----HUANG &amp;YUAN\" />\r\n    <MESSAGE value=\"Add a skill for mouse----hide his position&#10;-----YUAN\" />\r\n    <MESSAGE value=\"Chat Text message operationnel.&#10;bug niveau Audio et Image pour les versions recentes d'android\" />\r\n    <MESSAGE value=\"Pseudo,Pseudo dans le chat\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Pseudo,Pseudo dans le chat\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,42 +6,23 @@
+     </shared>
+   </component>
+   <component name="AndroidLogFilters">
+-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="firebase111" />
+     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
+   </component>
+   <component name="AutoImportSettings">
+     <option name="autoReloadType" value="NONE" />
+-  </component>
+-  <component name="BranchesTreeState">
+-    <expand>
+-      <path>
+-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-      </path>
+-      <path>
+-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-      </path>
+-      <path>
+-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+-      </path>
+-    </expand>
+-    <select />
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="64d94bf2-03e3-4c48-b694-6ed2502f9c83" name="Default Changelist" comment="Pseudo,Pseudo dans le chat">
+-      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_01_2022_20_37__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_01_2022_20_37__Default_Changelist_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_14_12__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_14_12__Default_Changelist_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/GameroomActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/GameroomActivity.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MapsActivity.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/MainActivity.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -49,7 +30,7 @@
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[9ce642b, C:\Users\PC\.android\avd\Nexus_6_API_30.avd]" />
++  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Dine ABDOULAYE\.android\avd\Pixel_2_API_30.avd]" />
+   <component name="ExternalProjectsData">
+     <projectState path="$PROJECT_DIR$">
+       <ProjectState />
+@@ -103,7 +84,9 @@
+     </file-type-list>
+   </component>
+   <component name="ProjectId" id="222rpsVDpw7pIkSuxkSg4nSLeVa" />
+-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
++    <ConfirmationsSetting value="1" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -111,12 +94,10 @@
+   <component name="PropertiesComponent">
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+-    <property name="cidr.known.project.marker" value="true" />
+     <property name="dart.analysis.tool.window.visible" value="false" />
+     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+     <property name="project.structure.last.edited" value="Project" />
+     <property name="project.structure.proportion" value="0.17" />
+     <property name="project.structure.side.proportion" value="0.2" />
+@@ -135,16 +116,22 @@
+       <recent name="C:\Users\karin\Desktop\PingApp3\app\src\main\java\com\example\ping3\utils" />
+       <recent name="C:\Users\karin\Desktop\PingApp3\app\src\main\res\layout" />
+     </key>
++    <key name="android.template.-1109144692">
++      <recent name="com.example.ping3.activities" />
++    </key>
+     <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\Dine ABDOULAYE\AndroidStudioProjects\PingApp4\app\src\main\res\drawable-v24" />
+       <recent name="C:\Users\karin\Desktop\PingApp3\app\src\main\res\drawable" />
+       <recent name="C:\Users\karin\Desktop\PingApp3\app\src\main\res\layout" />
+       <recent name="C:\Users\karin\Desktop\PingApp3\app\src\main\java\com\example\ping3\utils" />
+       <recent name="C:\Users\karin\Desktop\PingApp3\app\src\main\java\com\example\ping3\models" />
+-      <recent name="C:\Users\karin\Desktop\PingApp3\app\src\main\java\com\example\ping3\activities" />
+     </key>
+     <key name="android.template.108651176">
+       <recent name="com.example.ping3.activities" />
+     </key>
++    <key name="android.template.-1713211767">
++      <recent name="com.example.ping3.activities" />
++    </key>
+     <key name="android.template.-614367638">
+       <recent name="com.example.ping3" />
+     </key>
+@@ -152,6 +139,9 @@
+       <recent name="com.example.ping3.utils" />
+       <recent name="com.example.rps" />
+     </key>
++    <key name="android.template.-547799110">
++      <recent name="com.example.ping3.activities" />
++    </key>
+   </component>
+   <component name="RunManager">
+     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+@@ -170,7 +160,6 @@
+       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+-      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+@@ -215,9 +204,6 @@
+     </configuration>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="SvnConfiguration">
+-    <configuration />
+-  </component>
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+       <changelist id="64d94bf2-03e3-4c48-b694-6ed2502f9c83" name="Default Changelist" comment="" />
+@@ -337,4 +323,15 @@
+     <MESSAGE value="Pseudo,Pseudo dans le chat" />
+     <option name="LAST_COMMIT_MESSAGE" value="Pseudo,Pseudo dans le chat" />
+   </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
++          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ping3/activities/LoginActivity.java</url>
++          <line>73</line>
++          <option name="timeStamp" value="1" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
++  </component>
+ </project>
+\ No newline at end of file
