@@ -27,14 +27,14 @@
         android:id="@+id/joinRoom2"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/custombuttonblackoval"
         android:fontFamily="@font/chewy"
-        android:text="Join By Link"
+        android:text="Rejoindre par lien"
         android:textColor="#ffffff"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/joinRoom" />
 
@@ -57,7 +57,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/custombuttonyellowoval"
         android:fontFamily="@font/chewy"
-        android:text="Create Room"
+        android:text="Créer une salle"
         android:textColor="#000000"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,18 +65,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
+
     <Button
         android:id="@+id/joinRoom"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/custombuttonblackoval"
         android:fontFamily="@font/chewy"
-        android:text="Join Room"
+        android:text="Rejoindre une salle"
         android:textColor="#ffffff"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createRoom" />
 
@@ -84,17 +85,16 @@
         android:id="@+id/logout_btn"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/custombuttonyellowoval"
         android:fontFamily="@font/chewy"
         android:onClick="logout"
-        android:text="Logout"
+        android:text="Se déconnecter"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <ImageView
         android:id="@+id/imageView"

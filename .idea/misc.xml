@@ -4,14 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_cgu.xml" value="0.25" />
+        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_chat.xml" value="0.2" />
+        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_game_room.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_game_rules.xml" value="0.2" />
+        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_game_view.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_maps.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_pseudo.xml" value="0.19972826086956522" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_settings.xml" value="0.1" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_user.xml" value="0.2" />
+        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/bottomsheet_layout.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/cgu.xml" value="0.2" />
+        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/chat_entry_image.xml" value="0.2" />
+        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/content_chat.xml" value="0.2" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_room.xml" value="0.42857142857142855" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_view.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_view2.xml" value="0.18645833333333334" />
