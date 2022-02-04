@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     LinearLayout tapactionlayout;
     View white_forground_view;
     View bottomSheet;
+    ImageView chat;
     TextView timer_tv;
     int endHideTime = 0;
     boolean startHide = false;
@@ -88,23 +90,21 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         fAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_maps);
-        initLayout();
         initView();
+        initLayout();
         getExtra();
+        getTime();
         initTimeReceiver();
         addPlayer();
         getDeviceLocation();
         displayActionBar();
-
         //startTimer();
-
     }
 
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -112,7 +112,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -237,17 +236,16 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
             String intentAction = intent.getAction();
             if (intentAction.equals("com.demo.timer")) {
                 int time = intent.getIntExtra("time", 0);
-                timer_tv.setText(timeCalculate(timeSetted*60 -time));
+                timer_tv.setText(timeCalculate(timeSetted -time));
                 if (time != 0){
-                    if((timeSetted*60 - time) == 0){
+                    if((timeSetted - time) == 0){
                         stopTimer();
-                        unregisterReceiver(timerReceiver);
+                        //unregisterReceiver(timerReceiver);
                         timerReceiver=null;
                         Toast.makeText(getApplicationContext(),"The room is over",Toast.LENGTH_SHORT).show();
                         Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
                         startActivity(home);
                     }
-
                     if(time % 5 == 0 && isMouse){
                         getOthersPosition();
                     }
@@ -279,7 +277,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                     }
 
                 }
-
             }
         }
     }
@@ -327,9 +324,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.chat);
-        tapactionlayout = (LinearLayout) findViewById(R.id.tap_action_layout);
-        bottomSheet = findViewById(R.id.bottom_sheet1);
         mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet);
         mBottomSheetBehavior1.setPeekHeight(120);
         mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -354,7 +348,15 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
 
             }
         });
-
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("pseudo",pseudo);
+                startActivity(intent);
+            }
+        });
         tapactionlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -379,6 +381,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     }
     public void initView(){
         timer_tv = (TextView) findViewById(R.id.time_tv);
+        bottomSheet = findViewById(R.id.bottom_sheet1);
+        chat = (ImageView)findViewById(R.id.chatimg);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.chat);
+        tapactionlayout = (LinearLayout) findViewById(R.id.tap_action_layout);
     }
 
     public String timeCalculate(int s){
@@ -387,9 +393,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         s = s - (m*60);
         return m+" : "+String.format("%02d",s);
     }
+
     // Toolbar and Menus
-    public void displayActionBar()
-    {
+    public void displayActionBar() {
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
     }
@@ -407,7 +413,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-
             case R.id.normal:
                 try {
                     boolean success =   mMap.setMapStyle
@@ -420,7 +425,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                     Log.d(TAG,"Styles not found",e);
                 }
                 return true;
-
             case R.id.dark:
                 try {
                     boolean success =   mMap.setMapStyle
@@ -462,15 +466,15 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         {
             Log.d(TAG,"Styles not found",e);
         }
-
     }
+
     public void addPlayer(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         // Create a new user with a first and last name
         player.setPlayer_id(fAuth.getUid());
         player.setEmail(fAuth.getCurrentUser().getEmail());
-        player.setPseudo("New Player");
+        player.setPseudo(pseudo);
 
         Map<String, Object> user = new HashMap<>();
         user.put("UID", player.getPlayer_id());
@@ -491,11 +495,22 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    timeSetted = Integer. parseInt(String.valueOf(task.getResult().getValue()));
+                    timeSetted = (int) (Long.parseLong(String.valueOf(task.getResult().getValue())) - System.currentTimeMillis()/1000);
                     Log.d("firebase111", String.valueOf(task.getResult().getValue()));
                 }
             }
         });
-
     }
+
+    public void onHideMousePositionClicked(View view){
+        startHide = true;
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        unregisterReceiver(timerReceiver);
+        timerReceiver=null;
+        //stopTimer();
+    }
+
 }

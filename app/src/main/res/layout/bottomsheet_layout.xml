@@ -69,18 +69,19 @@
                         android:layout_height="wrap_content">
 
                         <RelativeLayout
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:padding="10dp"
-                            android:background="@drawable/circleshape"
                             android:layout_width="60dp"
-                            android:layout_height="60dp">
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/circleshape"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:onClick="onHideMousePositionClicked"
+                            android:padding="10dp">
 
                             <ImageView
                                 android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                 />
+                                android:layout_height="35dp" />
 
                         </RelativeLayout>
 
@@ -185,6 +186,7 @@
                             <ImageView
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
+                                android:id="@+id/chatimg"
                                 android:src="@drawable/chat" />
 
                         </RelativeLayout>

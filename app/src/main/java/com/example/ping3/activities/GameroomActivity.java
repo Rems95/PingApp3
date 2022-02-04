@@ -43,7 +43,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
     String roomId, player,id,userID,pseudo;
     int time;
     TextView roomIdTV, playerTV,playersList,statusTV, playerConTV ;
-    DatabaseReference myRef_initial, myRef_exit,myRef_players, myRef_players_full;
+    DatabaseReference myRef_initial, myRef_exit,myRef_players, myRef_players_full,myRef_status,myRef_time;
     FirebaseAuth fAuth;
     ImageView imageView;
     Button exitgameBtn,newPlayer, scanQR,go;
@@ -84,6 +84,9 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
             time = extra.getInt("time");
             roomIdTV.setText(roomId);
             playerTV.setText(player);
+            if (!player.equals("MOUSE")){
+                go.setEnabled(false);
+            }
 
 
         myRef_initial = FirebaseDatabase.getInstance().getReference().child("gameRoom");
@@ -94,6 +97,23 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if ((ds.getValue(gameroom_model.class).getRoomId()).equals(Integer.parseInt(roomId))) {
                         id = ds.getKey();
+                        myRef_time = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id).child("time");
+                        myRef_status = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id).child("status");
+                        myRef_status.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (Integer.parseInt(snapshot.getValue().toString()) == 2){
+                                    if(!player.equals("MOUSE")){
+                                        go.setEnabled(true);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                         myRef_players = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id);
                         myRef_players.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -178,6 +198,8 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra("id",id);
                 if(player.equals("MOUSE")){
                     intent.putExtra("Mouse","yes");
+                    myRef_status.setValue(2);
+                    myRef_time.setValue(System.currentTimeMillis()/1000 + time*60);
                 }
                 intent.putExtra("time",time);
                 startActivity(intent);
@@ -243,6 +265,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
+                                        stopService(new Intent(GameroomActivity.this, TimerService.class));
                                         Toast.makeText(mContext,"Game Room Closed Successfully ! ",Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
@@ -276,7 +299,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                                        stopService(new Intent(GameroomActivity.this, TimerService.class));
                                         myRef_exit.setValue(gr_exit);
                                         Toast.makeText(mContext,"Game Room Closed Successfully ! ",Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -336,6 +359,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                stopService(new Intent(GameroomActivity.this, TimerService.class));
                                 Toast.makeText(mContext,"Game Room Closed Successfully ! ",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
@@ -369,7 +393,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                stopService(new Intent(GameroomActivity.this, TimerService.class));
                                 myRef_exit.setValue(gr_exit);
                                 Toast.makeText(mContext,"Game Room Closed Successfully ! ",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
