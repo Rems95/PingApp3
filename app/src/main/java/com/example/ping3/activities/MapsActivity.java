@@ -71,6 +71,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     String Mouse = null;
     boolean isMouse = false;
     int timeSetted;
+    int lastTime;
     FloatingActionButton floatingActionButton;
     private BottomSheetBehavior mBottomSheetBehavior1;
     LinearLayout tapactionlayout;
@@ -78,9 +79,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     View bottomSheet;
     ImageView chat;
     TextView timer_tv;
-    int endHideTime = 0;
-    boolean startHide = false;
+    int endHideTime = 0 , endFaultTime = 0;
+    boolean startHide = false , startFault = false;
     DatabaseReference myRef_initial;
+    double faultX = 0, faultY = 0;
 
 
     @Override
@@ -95,6 +97,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         getExtra();
         getTime();
         initTimeReceiver();
+        startTimer();
         addPlayer();
         getDeviceLocation();
         displayActionBar();
@@ -161,6 +164,8 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 x[0] = Double.parseDouble(document.getData().get("X").toString());
                                 y[0] = Double.parseDouble(document.getData().get("Y").toString());
+                                faultX = x[0];
+                                faultY = y[0];
                                 LatLng pin = new LatLng(x[0], y[0]);
                                 mMap.addMarker(new MarkerOptions().position(pin));
                             }
@@ -236,42 +241,50 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
             String intentAction = intent.getAction();
             if (intentAction.equals("com.demo.timer")) {
                 int time = intent.getIntExtra("time", 0);
-                timer_tv.setText(timeCalculate(timeSetted -time));
-                if (time != 0){
-                    if((timeSetted - time) == 0){
+                timer_tv.setText(timeCalculate(timeSetted - time));
+                lastTime = timeSetted - time;
+                if (time != 0) {
+                    if (lastTime == 0) {
                         stopTimer();
                         //unregisterReceiver(timerReceiver);
-                        timerReceiver=null;
-                        Toast.makeText(getApplicationContext(),"The room is over",Toast.LENGTH_SHORT).show();
-                        Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);;
+                        timerReceiver = null;
+                        Toast.makeText(getApplicationContext(), "The room is over", Toast.LENGTH_SHORT).show();
+                        Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        ;
                         startActivity(home);
                     }
-                    if(time % 5 == 0 && isMouse){
+                    if (lastTime % 5 == 0 && isMouse) {
                         getOthersPosition();
                     }
-                    if(time % 30 == 0 && !isMouse ){
+                    if (lastTime % 30 == 0 && !isMouse) {
                         getMousePosition();
                     }
-                    if(time % 3 == 0){
-                        if (isMouse){
-                            if(startHide){
-                                if (endHideTime == 0){
-                                    endHideTime = time +10;
-                                    UpdatePosition(0,0);
-                                }
-                                else if(endHideTime > time){
-                                    UpdatePosition(0,0);
-                                }
-                                else{
-                                    startHide =false;
+                    if (lastTime % 3 == 0) {
+                        if (isMouse) {
+                            if (startHide) {
+                                if (endHideTime == 0) {
+                                    endHideTime = time + 10;
+                                    UpdatePosition(0, 0);
+                                } else if (endHideTime > time) {
+                                    UpdatePosition(0, 0);
+                                } else {
+                                    startHide = false;
                                     getDeviceLocation();
                                 }
-                            }
-                            else{
+                            } else if (startFault) {
+                                if (endFaultTime == 0) {
+                                    endFaultTime = time + 10;
+                                    UpdatePosition(faultX, faultY);
+                                } else if (endFaultTime > time) {
+                                    UpdatePosition(faultX, faultY);
+                                } else {
+                                    startFault = false;
+                                    getDeviceLocation();
+                                }
+                            } else {
                                 getDeviceLocation();
                             }
-                        }
-                        else{
+                        } else {
                             getDeviceLocation();
                         }
                     }
@@ -311,15 +324,16 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         room_id = extra.getString("room_id");
         id = extra.getString("id");
         pseudo = extra.getString("pseudo");
-        System.out.println("Pseudo"+pseudo);
+        //System.out.println("Pseudo"+pseudo);
         Mouse = extra.getString("Mouse");
-        timeSetted = extra.getInt("time");
+        //timeSetted = extra.getInt("time");
         if(Mouse != null){
             if (Mouse.equals("yes")){
                 isMouse = true;
             }
         }
     }
+
     public void initLayout(){
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -505,11 +519,16 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     public void onHideMousePositionClicked(View view){
         startHide = true;
     }
+
+    public void onFaultMousePositionClicked(View view){
+        startFault = true;
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        unregisterReceiver(timerReceiver);
-        timerReceiver=null;
+        //unregisterReceiver(timerReceiver);
+        //timerReceiver=null;
         //stopTimer();
     }
 

@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_settings.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/font/chewy.xml" value="0.3635897435897436" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_cgu.xml" value="0.25" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_chat.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/activity_game_room.xml" value="0.2" />
@@ -21,7 +19,19 @@
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/cgu.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/chat_entry_image.xml" value="0.2" />
         <entry key="..\:/Users/Dine ABDOULAYE/AndroidStudioProjects/PingApp4/app/src/main/res/layout/content_chat.xml" value="0.2" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/custombuttongreyoval.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/custombuttonsilveroval.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/custombuttonyellowoval.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/ic_directions_car_white_24dp.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/ic_directions_walk_white_24dp.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/ic_dns_red_400_24dp.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/ic_insert_photo_black_24px.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/rounded_corner_received.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/drawable/rounded_corner_sent.xml" value="0.3351851851851852" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/font/chewy.xml" value="0.3635897435897436" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_chat.xml" value="0.3390625" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_room.xml" value="0.42857142857142855" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_rules.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_view.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_game_view2.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_login.xml" value="0.18645833333333334" />

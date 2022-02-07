@@ -191,7 +191,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startService(new Intent(getApplicationContext(), TimerService.class));
+                //startService(new Intent(getApplicationContext(), TimerService.class));
                 Intent intent = new Intent(GameroomActivity.this, MapsActivity.class);
                 intent.putExtra("room_id",roomId);
                 intent.putExtra("pseudo",pseudo);
@@ -201,7 +201,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                     myRef_status.setValue(2);
                     myRef_time.setValue(System.currentTimeMillis()/1000 + time*60);
                 }
-                intent.putExtra("time",time);
+                //intent.putExtra("time",time);
                 startActivity(intent);
             }
         });
@@ -218,9 +218,9 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
             );
 
         } catch (IllegalArgumentException Illegalargumentexception) {
-
             return null;
         }
+
         int bitMatrixWidth = bitMatrix.getWidth();
 
         int bitMatrixHeight = bitMatrix.getHeight();

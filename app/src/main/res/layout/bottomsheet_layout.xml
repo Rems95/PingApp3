@@ -103,29 +103,30 @@
                         android:layout_height="wrap_content">
 
                         <RelativeLayout
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:padding="10dp"
-                            android:background="@drawable/circleshape"
                             android:layout_width="60dp"
-                            android:layout_height="60dp">
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/circleshape"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:onClick="onFaultMousePositionClicked"
+                            android:padding="10dp">
 
                             <ImageView
                                 android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                 />
+                                android:layout_height="35dp" />
 
                         </RelativeLayout>
 
 
                         <TextView
-                            android:layout_gravity="center"
-                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/grey"
-                            android:text="Start"/>
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Mauvais position"
+                            android:textColor="@color/grey" />
 
                     </LinearLayout>
 

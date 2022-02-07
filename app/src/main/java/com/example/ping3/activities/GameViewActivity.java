@@ -48,7 +48,7 @@ public class GameViewActivity extends AppCompatActivity {
     TimerReceiver timerReceiver=null;
     String room_id,id,pseudo;
     String Mouse = null;
-    int timeSetted;
+    int timeSetted = 300;
     boolean isMouse = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     FirebaseAuth fAuth;
@@ -95,8 +95,8 @@ public class GameViewActivity extends AppCompatActivity {
             String intentAction = intent.getAction();
             if (intentAction.equals("com.demo.timer")) {
                 int time = intent.getIntExtra("time", 0);
-                timer_tv.setText(timeCalculate(timeSetted*60 -time));
-                if((timeSetted*60 - time) == 0){
+                timer_tv.setText(timeCalculate(5*60 -time));
+                if((5*60 - time) == 0){
                     //Stop service
                     stopService(new Intent(GameViewActivity.this, TimerService.class));
                     unregisterReceiver(timerReceiver);
@@ -176,7 +176,8 @@ public class GameViewActivity extends AppCompatActivity {
 
 
     public void initView(){
-        button_hide = (Button)findViewById(R.id.chat_button);
+        button_hide = (Button)findViewById(R.id.button_hide_position);
+        //chatbutton=findViewById(R.id.chat_button);
         timer_tv = (TextView) findViewById(R.id.Timer);
     }
 
