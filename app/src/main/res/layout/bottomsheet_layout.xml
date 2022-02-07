@@ -138,16 +138,18 @@
                         android:layout_height="wrap_content">
 
                         <RelativeLayout
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:padding="10dp"
-                            android:background="@drawable/circleshape"
                             android:layout_width="60dp"
-                            android:layout_height="60dp">
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/circleshape"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:onClick="onNoChatClicked"
+                            android:padding="10dp">
 
                             <ImageView
-                                
+
                                 android:layout_width="35dp"
                                 android:layout_height="35dp" />
 
@@ -155,12 +157,12 @@
 
 
                         <TextView
-                            android:layout_gravity="center"
-                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/grey"
-                            android:text="Stop"/>
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="No chat"
+                            android:textColor="@color/grey" />
 
 
 
@@ -204,6 +206,19 @@
 
 
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="76dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="onAttrapeClicked"
+                        android:text="Attrapé" />
                 </LinearLayout>
 
 

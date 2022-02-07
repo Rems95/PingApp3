@@ -79,9 +79,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     View bottomSheet;
     ImageView chat;
     TextView timer_tv;
-    int endHideTime = 0 , endFaultTime = 0;
-    boolean startHide = false , startFault = false;
-    DatabaseReference myRef_initial;
+    int endHideTime = 0 , endFaultTime = 0 , endNoChatTime = 0;
+    boolean startHide = false , startFault = false , startNoChat = false;
+    DatabaseReference myRef_initial,myRef_status;
     double faultX = 0, faultY = 0;
 
 
@@ -101,6 +101,24 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         addPlayer();
         getDeviceLocation();
         displayActionBar();
+        //initial game room status chagne listener, 99 = cat win
+        myRef_status = FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id).child("status");
+        myRef_status.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (Integer.parseInt(snapshot.getValue().toString()) == 99){
+                    stopTimer();
+                    timerReceiver = null;
+                    Toast.makeText(getApplicationContext(), "Les chats gagnent!!!", Toast.LENGTH_LONG).show();
+                    Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(home);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //startTimer();
     }
 
@@ -250,7 +268,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                         timerReceiver = null;
                         Toast.makeText(getApplicationContext(), "The room is over", Toast.LENGTH_SHORT).show();
                         Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        ;
                         startActivity(home);
                     }
                     if (lastTime % 5 == 0 && isMouse) {
@@ -263,26 +280,40 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                         if (isMouse) {
                             if (startHide) {
                                 if (endHideTime == 0) {
+                                    Toast.makeText(getApplicationContext(),"Vous commencez à cacher.",Toast.LENGTH_LONG).show();
                                     endHideTime = time + 10;
                                     UpdatePosition(0, 0);
                                 } else if (endHideTime > time) {
                                     UpdatePosition(0, 0);
                                 } else {
+                                    Toast.makeText(getApplicationContext(),"Vous ne pouvez plus vous cacher.",Toast.LENGTH_LONG).show();
                                     startHide = false;
                                     getDeviceLocation();
                                 }
                             } else if (startFault) {
                                 if (endFaultTime == 0) {
+                                    Toast.makeText(getApplicationContext(),"Vous commencez à fournir le mauvais emplacement.",Toast.LENGTH_LONG).show();
                                     endFaultTime = time + 10;
                                     UpdatePosition(faultX, faultY);
                                 } else if (endFaultTime > time) {
                                     UpdatePosition(faultX, faultY);
                                 } else {
+                                    Toast.makeText(getApplicationContext(),"Vous ne pouvez plus donner de fausses informations",Toast.LENGTH_LONG).show();
                                     startFault = false;
                                     getDeviceLocation();
                                 }
                             } else {
                                 getDeviceLocation();
+                            }
+                            if (startNoChat){
+                                if (endNoChatTime == 0) {
+                                    Toast.makeText(getApplicationContext(),"Vous avez commencé à désactiver le chat.",Toast.LENGTH_LONG).show();
+                                    endNoChatTime = time + 10;
+                                    myRef_status.setValue(98);
+                                } else if (endNoChatTime <= time) {
+                                    Toast.makeText(getApplicationContext(),"Vous ne pouvez plus désactiver le chat.",Toast.LENGTH_LONG).show();
+                                    myRef_status.setValue(2);
+                                }
                             }
                         } else {
                             getDeviceLocation();
@@ -524,12 +555,14 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         startFault = true;
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        //unregisterReceiver(timerReceiver);
-        //timerReceiver=null;
-        //stopTimer();
+    public void onNoChatClicked(View view){
+        startNoChat = true;
+    }
+
+    public void onAttrapeClicked(View view){
+        if (isMouse){
+            myRef_status.setValue(99);
+        }
     }
 
 }

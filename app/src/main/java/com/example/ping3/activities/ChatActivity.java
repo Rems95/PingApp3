@@ -39,6 +39,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -79,6 +80,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private EditText messageEditView;
     private ImageButton messageSendButton;
+
+    private boolean chatStatus = true;
+
+
     private final TextWatcher editMessageTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,7 +95,7 @@ public class ChatActivity extends AppCompatActivity {
 
             if (s.length() == 0) {
                 messageSendButton.setEnabled(false);
-            } else {
+            } else if(chatStatus){
                 messageSendButton.setEnabled(true);
             }
         }
@@ -120,7 +125,6 @@ public class ChatActivity extends AppCompatActivity {
             } else {
                 Log.w("Chat", "No messages");
             }
-
             if (progressBar.getVisibility() == View.VISIBLE) {
                 hideProgressBar();
             }
@@ -184,6 +188,23 @@ public class ChatActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id1).child("userMessages").child("messages")
                 .addChildEventListener(messageListener);
+
+        FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id1).child("status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (Integer.parseInt(snapshot.getValue().toString()) == 98){
+                    chatStatus = false;
+                }
+                else {
+                    chatStatus = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         chatAdapter = new ChatAdapter(this, messages);
         messageListView = (ListView) findViewById(R.id.message_list);

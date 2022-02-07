@@ -104,6 +104,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (Integer.parseInt(snapshot.getValue().toString()) == 2){
                                     if(!player.equals("MOUSE")){
+                                        Toast.makeText(getApplicationContext(),"Vous pouvez commencer",Toast.LENGTH_LONG).show();
                                         go.setEnabled(true);
                                     }
                                 }
