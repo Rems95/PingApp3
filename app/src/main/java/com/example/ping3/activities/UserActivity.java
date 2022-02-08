@@ -3,8 +3,11 @@ package com.example.ping3.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.ping3.R;
 
@@ -21,7 +24,7 @@ public class UserActivity extends AppCompatActivity {
         finish();
     }
     public void mod_pseudo(View view){
-        startActivity(new Intent(getApplicationContext(), PseudoActivity.class));
-        finish();
+
+
     }
 }

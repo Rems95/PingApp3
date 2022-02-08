@@ -19,9 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.PseudoActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.UserActivity"
             android:exported="false" />
         <activity

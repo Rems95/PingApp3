@@ -19,23 +19,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="80dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="97dp"
-        android:text="Pseudo : "
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reg_pseudo_out"
+        android:layout_width="391dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="17dp"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/set_pseudo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/chewy"
+        android:hint=" Nouveau Pseudo"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/pseudo"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/view_email_out"
+        android:layout_width="391dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="17dp"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/view_email"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="256dp"
-        android:text="TextView"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="12dp"
+        android:editable="false"
+        android:fontFamily="@font/chewy"
+        android:hint=" Email"
+        android:inputType="text"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,10 +77,10 @@
         android:id="@+id/mod_pseudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="122dp"
-        android:text="Modifier le pseudo"
+        android:layout_marginTop="372dp"
+        android:layout_marginEnd="124dp"
         android:onClick="mod_pseudo"
+        android:text="Enregistrer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
