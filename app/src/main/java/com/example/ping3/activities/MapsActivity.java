@@ -280,7 +280,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                     if (lastTime % 5 == 0 && isMouse) {
                         getOthersPosition();
                     }
-                    if (lastTime % 30 == 0 && !isMouse) {
+                    if (lastTime % 300 == 0 && !isMouse) {
                         getMousePosition();
                     }
                     if (lastTime % 3 == 0) {
@@ -288,7 +288,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             if (startHide) {
                                 if (endHideTime == 0) {
                                     Toast.makeText(getApplicationContext(),"Vous commencez à cacher.",Toast.LENGTH_LONG).show();
-                                    endHideTime = time + 10;
+                                    endHideTime = time + 320;
                                     UpdatePosition(0, 0);
                                 } else if (endHideTime > time) {
                                     UpdatePosition(0, 0);
@@ -300,7 +300,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             } else if (startFault) {
                                 if (endFaultTime == 0) {
                                     Toast.makeText(getApplicationContext(),"Vous commencez à fournir le mauvais emplacement.",Toast.LENGTH_LONG).show();
-                                    endFaultTime = time + 10;
+                                    endFaultTime = time + 320;
                                     UpdatePosition(faultX, faultY);
                                 } else if (endFaultTime > time) {
                                     UpdatePosition(faultX, faultY);
@@ -315,7 +315,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             if (startNoChat){
                                 if (endNoChatTime == 0) {
                                     Toast.makeText(getApplicationContext(),"Vous avez commencé à désactiver le chat.",Toast.LENGTH_LONG).show();
-                                    endNoChatTime = time + 10;
+                                    endNoChatTime = time + 320;
                                     myRef_status.setValue(98);
                                 } else if (endNoChatTime <= time) {
                                     Toast.makeText(getApplicationContext(),"Vous ne pouvez plus désactiver le chat.",Toast.LENGTH_LONG).show();
