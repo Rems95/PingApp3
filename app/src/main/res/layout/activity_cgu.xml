@@ -25,24 +25,16 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <Button
+
+    <ImageView
         android:id="@+id/exitcgu"
-        android:layout_width="312dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="599dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/custombuttonblackoval"
-        android:fontFamily="@font/chewy"
+        android:layout_marginStart="178dp"
         android:onClick="exit_cgu"
-        android:text="Exit"
-        android:textColor="#ffffff"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
 
 

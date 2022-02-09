@@ -31,18 +31,7 @@ public class CguActivity extends AppCompatActivity {
         webView.loadUrl("file:///android_asset/cgu.html");
 
     }
-    private class MyBrowser extends WebViewClient {
 
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.equals("Navigation://OpenNativeScreen")) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-                return true;
-            }
-            return false;
-        }
-    }
 
     public void exit_cgu(View view){
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
