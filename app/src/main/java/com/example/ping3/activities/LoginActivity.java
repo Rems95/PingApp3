@@ -1,9 +1,11 @@
 package com.example.ping3.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.ping3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         setContentView(R.layout.activity_login);
 
         email = findViewById(R.id.log_email);
@@ -141,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
 
 
     }

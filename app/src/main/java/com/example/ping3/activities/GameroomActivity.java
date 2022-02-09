@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class GameroomActivity extends AppCompatActivity implements View.OnClickListener {
 
     String roomId, player,id,userID,pseudo;
-    int time;
+    int time,nbPlayers;
     TextView roomIdTV, playerTV,playersList,statusTV, playerConTV ;
     DatabaseReference myRef_initial, myRef_exit,myRef_players, myRef_players_full,myRef_status,myRef_time;
     FirebaseAuth fAuth;
@@ -81,12 +81,12 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
 
             roomId = extra.getString("roomId");
             player = extra.getString("player");
+            nbPlayers = extra.getInt("nbPlayers");
             time = extra.getInt("time");
             roomIdTV.setText(roomId);
             playerTV.setText(player);
-            if (!player.equals("MOUSE")){
-                go.setEnabled(false);
-            }
+            go.setEnabled(false);
+            statusTV.setText("Not ready");
 
 
         myRef_initial = FirebaseDatabase.getInstance().getReference().child("gameRoom");
@@ -104,8 +104,11 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (Integer.parseInt(snapshot.getValue().toString()) == 2){
                                     if(!player.equals("MOUSE")){
-                                        Toast.makeText(getApplicationContext(),"Vous pouvez commencer",Toast.LENGTH_LONG).show();
-                                        go.setEnabled(true);
+                                        if(!go.isEnabled()){
+                                            statusTV.setText("GOGOGO");
+                                            Toast.makeText(getApplicationContext(),"Vous pouvez commencer",Toast.LENGTH_LONG).show();
+                                            go.setEnabled(true);
+                                        }
                                     }
                                 }
                             }
@@ -128,7 +131,13 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                                     playersList.append(Players.get(i).getPseudo());
                                     playersList.append(" ");
                                     System.out.println(Players.get(i).getPseudo());
-
+                                }
+                                if (Players.size() >= nbPlayers){
+                                    if (player.equals("MOUSE")){
+                                        statusTV.setText("GO when you are ready");
+                                        go.setEnabled(true);
+                                    }
+                                    playerConTV.setText("OK");
                                 }
                             }
 

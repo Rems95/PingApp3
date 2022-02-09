@@ -81,8 +81,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     TextView timer_tv;
     int endHideTime = 0 , endFaultTime = 0 , endNoChatTime = 0;
     boolean startHide = false , startFault = false , startNoChat = false;
+    //for room status, 1 = room not ready , 2 = room ready to go , 99 = game over and mouse lose , 98 = desactivation of chat room
     DatabaseReference myRef_initial,myRef_status;
     double faultX = 0, faultY = 0;
+    double mousex,mousey;
 
 
     @Override
@@ -180,8 +182,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                         if (task.isSuccessful()) {
                             //Toast.makeText(MapsActivity.this,"OK",Toast.LENGTH_SHORT).show();
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                //I am not sure why I need two tableaux to get information, but if I don't do that, there will be some error.
                                 x[0] = Double.parseDouble(document.getData().get("X").toString());
                                 y[0] = Double.parseDouble(document.getData().get("Y").toString());
+                                //this is for once mouse decide to give a wrong position.
                                 faultX = x[0];
                                 faultY = y[0];
                                 LatLng pin = new LatLng(x[0], y[0]);
@@ -211,6 +215,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 x[0] = Double.parseDouble(document.getData().get("X").toString());
                                 y[0] = Double.parseDouble(document.getData().get("Y").toString());
+                                mousex = x[0];
+                                mousey = y[0];
+                                //System.out.println("x="+x[0]+"y="+y[0]);
                                 LatLng pin = new LatLng(x[0], y[0]);
                                 mMap.addMarker(new MarkerOptions().position(pin));
                             }
@@ -354,7 +361,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         Bundle extra = getIntent().getExtras();
         room_id = extra.getString("room_id");
         id = extra.getString("id");
-        pseudo = extra.getString("pseudo");
+        pseudo = extra.getString("pseudo",fAuth.getCurrentUser().getEmail());
         //System.out.println("Pseudo"+pseudo);
         Mouse = extra.getString("Mouse");
         //timeSetted = extra.getInt("time");
@@ -515,7 +522,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
 
     public void addPlayer(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        fAuth = FirebaseAuth.getInstance();
+
         // Create a new user with a first and last name
         player.setPlayer_id(fAuth.getUid());
         player.setEmail(fAuth.getCurrentUser().getEmail());

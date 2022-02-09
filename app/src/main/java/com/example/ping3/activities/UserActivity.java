@@ -25,6 +25,5 @@ public class UserActivity extends AppCompatActivity {
     }
     public void mod_pseudo(View view){
 
-
     }
 }

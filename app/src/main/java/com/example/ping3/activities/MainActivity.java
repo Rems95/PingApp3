@@ -1,5 +1,6 @@
 package com.example.ping3.activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.ping3.models.Player_model;
 import com.example.ping3.R;
@@ -39,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         setContentView(R.layout.activity_main);
         createRoom = findViewById(R.id.createRoom);
         joinRoom = findViewById(R.id.joinRoom);
         ScanBtn = (Button) findViewById(R.id.joinRoom2);
         fAuth = FirebaseAuth.getInstance();
         userID = fAuth.getCurrentUser().getUid();
+
 
         ScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,15 +111,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void cgu(View view){
         startActivity(new Intent(getApplicationContext(), CguActivity.class));
-        finish();
+        //finish();
     }
     public void rdg(View view){
         startActivity(new Intent(getApplicationContext(), GameRulesActivity.class));
-        finish();
+        //finish();
     }
     public void user(View view){
         startActivity(new Intent(getApplicationContext(), UserActivity.class));
-        finish();
+        //finish();
     }
 
 
