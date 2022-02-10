@@ -41,6 +41,8 @@ import java.util.Map;
  * we can add boussole here
  * and chat room, skills, Time etc.
  * ---HUANG
+ *
+ * OK now we are able to add things in maps activity this activity is unused
  */
 public class GameViewActivity extends AppCompatActivity {
 

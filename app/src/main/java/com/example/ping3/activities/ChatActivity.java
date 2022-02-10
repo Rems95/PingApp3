@@ -110,7 +110,6 @@ public class ChatActivity extends AppCompatActivity {
     private String pseudo;
     private Uri imageUri;
     private Bitmap resizedImage;
-    private ImageButton messageAtachImageButton;
     private ListView messageListView;
     private ProgressBar progressBar;
     private final ChildEventListener messageListener = new ChildEventListener() {
@@ -149,7 +148,6 @@ public class ChatActivity extends AppCompatActivity {
             Log.w("Chat", "loadPost:onCancelled", databaseError.toException());
         }
     };
-    private ImageButton messageRecordButton;
     private MediaRecorder mediaRecorder;
     private boolean recording;
     private String recordPath;
@@ -171,13 +169,8 @@ public class ChatActivity extends AppCompatActivity {
         messageSendButton.setEnabled(false);
         messageSendButton.setOnClickListener(v -> sendMessage());
 
-        messageAtachImageButton = (ImageButton) findViewById(R.id.message_attach_image);
-        messageAtachImageButton.setOnClickListener(v -> showImageAttachementDialog());
 
         recording = false;
-        messageRecordButton = (ImageButton) findViewById(R.id.message_record_audio);
-        messageRecordButton.setOnClickListener(v -> voiceRecordingAction());
-
         messages = new ArrayList<>();
         Bundle extra = getIntent().getExtras();
         id1 = extra.getString("id");
@@ -365,7 +358,6 @@ public class ChatActivity extends AppCompatActivity {
 
             if(!recording){
                 Toast.makeText(ChatActivity.this, "Started voice recording", Toast.LENGTH_SHORT).show();
-                messageRecordButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_stop_black_24px));
 
                 initializeMediaRecord();
                 startRecordingAudio();
@@ -373,7 +365,6 @@ public class ChatActivity extends AppCompatActivity {
             else{
                 Toast.makeText(ChatActivity.this, "Stopped voice recording", Toast.LENGTH_SHORT).show();
 
-                messageRecordButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_keyboard_voice_black_24px));
                 stopRecordingAudio();
                 sendRecord();
             }
