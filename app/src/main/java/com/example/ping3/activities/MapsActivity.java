@@ -45,6 +45,7 @@ import com.example.ping3.utils.GPSTracker;
 import com.example.ping3.utils.TimerService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -108,7 +109,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     boolean startHide = false , startFault = false , startNoChat = false;
     DatabaseReference myRef_initial,myRef_status,myRef_level;
     double faultX = 0, faultY = 0;
-    double mousepositionx=0, mousepositiony = 0;
     Handler handler = new Handler();
     Runnable runnable;
 
@@ -188,6 +188,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
+        getDeviceLocation1st();
 
     }
 
@@ -476,6 +477,8 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
                         Location currentLocation = (Location)task.getResult();
+                        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), 12.0f));
+
                         //Toast.makeText(MapsActivity.this,"Current location is"+currentLocation.getLongitude()+","+currentLocation.getLatitude(),Toast.LENGTH_SHORT).show();
                         UpdatePosition(currentLocation.getLatitude(),currentLocation.getLongitude());
                     } else{
@@ -487,6 +490,32 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
             Toast.makeText(this, "SecurityException :"+ e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
+    private void getDeviceLocation1st(){
+        float zoomLevel = 15.0f;
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        try{
+            Task location = mFusedLocationProviderClient.getLastLocation();
+            location.addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if(task.isSuccessful()){
+                        Location currentLocation = (Location)task.getResult();
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), 12.0f));
+
+                        //Toast.makeText(MapsActivity.this,"Current location is"+currentLocation.getLongitude()+","+currentLocation.getLatitude(),Toast.LENGTH_SHORT).show();
+                        UpdatePosition(currentLocation.getLatitude(),currentLocation.getLongitude());
+                    } else{
+                        Toast.makeText(MapsActivity.this,"Current location is null",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }catch (SecurityException e){
+            Toast.makeText(this, "SecurityException :"+ e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 
     public void UpdatePosition(double x,double y){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -801,19 +830,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         });
     }
 
-    // Default Theme
-    public void normal(GoogleMap mMap){
-        try {
-            boolean success =   mMap.setMapStyle
-                    (MapStyleOptions.loadRawResourceStyle
-                            (this,R.raw.map_style));
-            if(!success)
-            {  Log.d(TAG,"Styles parsing failed"); }
-        }catch (Resources.NotFoundException e)
-        {
-            Log.d(TAG,"Styles not found",e);
-        }
-    }
 
     public void addPlayer(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -875,6 +891,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
             compass.stop();
         }
     }
+
     public void onHideMousePositionClicked(View view){
         startHide = true;
     }
