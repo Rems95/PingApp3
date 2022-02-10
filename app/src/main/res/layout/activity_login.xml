@@ -57,7 +57,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/log_email_out"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        app:passwordToggleEnabled="true"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/log_password"
@@ -67,6 +69,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
             android:hint="Mot de passe"
+            android:ems="15"
             android:fontFamily="@font/chewy"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
