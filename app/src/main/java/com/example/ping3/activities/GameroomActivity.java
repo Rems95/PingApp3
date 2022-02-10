@@ -128,9 +128,24 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
                                 playersList.setText("");
 
                                 for (int i=0;i<Players.size();i++){
-                                    playersList.append(Players.get(i).getPseudo());
-                                    playersList.append(" ");
-                                    System.out.println(Players.get(i).getPseudo());
+                                    if (fAuth.getCurrentUser() != null) {
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                        DocumentReference usersRef = db.collection("users").document(fAuth.getCurrentUser().getUid());
+                                        usersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot document = task.getResult();
+                                                    if (document.exists()) {
+                                                        pseudo = (String) document.get("pseudo");
+                                                        playersList.append(pseudo);
+                                                        playersList.append(" ");
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+
                                 }
                                 if (Players.size() >= nbPlayers){
                                     if (player.equals("MOUSE")){
@@ -154,21 +169,7 @@ public class GameroomActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-            if (fAuth.getCurrentUser() != null) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference usersRef = db.collection("users").document(fAuth.getCurrentUser().getUid());
-                usersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                pseudo = (String) document.get("pseudo");
-                            }
-                        }
-                    }
-                });
-            }
+
         }
 
         newPlayer.setOnClickListener(new View.OnClickListener() {

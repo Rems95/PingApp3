@@ -99,12 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             String pseudonyme = pseudo.getText().toString();
 
-            email.setText("");
-            email.setHint("Email");
-            password.setText("");
-            password.setHint("Password");
-            confirmpwd.setText("");
-            confirmpwd.setHint("Confirm Password");
+
 
 
             progressbar.setVisibility(View.VISIBLE);
@@ -158,6 +153,8 @@ public class RegisterActivity extends AppCompatActivity {
         String mPassword = password.getText().toString().trim();
 
         String mCPassword = confirmpwd.getText().toString().trim();
+        String pseudonyme = pseudo.getText().toString().trim();
+
 
 
         if (TextUtils.isEmpty(mEmail)) {
@@ -173,7 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
             valid =  false;
         } else if (!PASSWORD_PATTERN.matcher(mPassword).matches()) {
             password.setError("Password too weak - must contain atleast 1 uppercase, " +
-                    "1 lowercase,1 special character" +
+                    "1 lowercase" +
                     " 6-20 characters in length   ");
             valid =  false;
         }
@@ -183,6 +180,10 @@ public class RegisterActivity extends AppCompatActivity {
             valid =  false;
         }else if(!(mPassword).equals(mCPassword)){
             confirmpwd.setError("Passwords do not match!");
+            valid =  false;
+        }
+        if (TextUtils.isEmpty(pseudonyme)){
+            confirmpwd.setError("Confirm password field is empty");
             valid =  false;
         }
 

@@ -39,6 +39,7 @@
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_maps.xml" value="0.42857142857142855" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_register.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_settings.xml" value="0.31979166666666664" />
+        <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/activity_user.xml" value="0.3390625" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/bottomsheet_layout.xml" value="0.31979166666666664" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/chat_entry_image.xml" value="0.31979166666666664" />
         <entry key="..\:/Users/Hongjun-HUANG/AndroidStudioProjects/PingApp3/app/src/main/res/layout/chat_entry_sound.xml" value="0.31979166666666664" />
@@ -47,15 +48,8 @@
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/drawable/custombuttonblackoval.xml" value="0.12604166666666666" />
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_login.xml" value="0.10625" />
         <entry key="..\:/Users/K-chan/Desktop/3/Ping60/app/src/main/res/layout/activity_register.xml" value="0.10625" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/activity_chat.xml" value="0.15" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/activity_login.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/activity_maps.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/bottomsheet_layout.xml" value="0.18" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/chat_entry_image.xml" value="0.2617753623188406" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/chat_entry_sound.xml" value="0.2617753623188406" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/chat_entry_text.xml" value="0.2617753623188406" />
-        <entry key="..\:/Users/Karin/StudioProjects/PingApp3/app/src/main/res/layout/content_chat.xml" value="0.2617753623188406" />
+        <entry key="..\:/Users/Karin/Desktop/test/app/src/main/res/layout/activity_splashscreen.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Karin/Desktop/test/app/src/main/res/layout/activity_user.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/karin/Desktop/PingApp3/app/src/main/res/drawable/ic_insert_photo_black_24px.xml" value="0.1" />
         <entry key="..\:/Users/karin/Desktop/PingApp3/app/src/main/res/drawable/ic_keyboard_voice_black_24px.xml" value="0.1" />
         <entry key="..\:/Users/karin/Desktop/PingApp3/app/src/main/res/drawable/ic_play_arrow_black_24px.xml" value="0.1" />

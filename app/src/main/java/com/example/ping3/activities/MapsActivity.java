@@ -752,7 +752,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                         Log.d(TAG, "Styles not found", e);
                     }
                 }
-                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

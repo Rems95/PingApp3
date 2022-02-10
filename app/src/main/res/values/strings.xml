@@ -2,32 +2,32 @@
     <string name="app_name">Ping3</string>
     <string name="title_activity_maps">MapsActivity</string>
 
-<!--Add values for spinners in the game setting-->
-<string-array name="time">
-    <item>5</item>
-    <item>10</item>
-    <item>15</item>
-    <item>20</item>
-    <item>30</item>
-    <item>45</item>
-    <item>60</item>
-</string-array>
+    <!--Add values for spinners in the game setting-->
+    <string-array name="time">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+    </string-array>
 
-<string-array name="nbplayers">
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>5</item>
-    <item>6</item>
-    <item>7</item>
-    <item>8</item>
-</string-array>
+    <string-array name="nbplayers">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 
-<string-array name="level">
-    <item>FACILE</item>
-    <item>MOYEN</item>
-    <item>DIFFICILE</item>
-</string-array>
+    <string-array name="level">
+        <item>FACILE</item>
+        <item>MOYEN</item>
+        <item>DIFFICILE</item>
+    </string-array>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -35,9 +35,12 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <string name="cgu">CGU</string>
     <string name="rdg">RDG</string>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="normal">Normal</string>
@@ -57,6 +60,15 @@
     <string name="pls_enable_location">Please turn on Location and press the button again.</string>
     <string name="degree_from_north">degrees from the north.</string>
     <string name="using_last_location">using last location.</string>
+    <string name="title_activity_splashscreen">Splashscreen</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>
 
