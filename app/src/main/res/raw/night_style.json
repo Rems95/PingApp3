@@ -79,7 +79,7 @@
         "color": "#1bd317"
       },
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
@@ -100,7 +100,7 @@
         "color": "#d689ec"
       },
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
@@ -246,7 +246,7 @@
         "color": "#3eb7e0"
       },
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
