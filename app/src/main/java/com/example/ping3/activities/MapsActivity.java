@@ -222,15 +222,15 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 x[0] = Double.parseDouble(document.getData().get("X").toString());
                                 y[0] = Double.parseDouble(document.getData().get("Y").toString());
-                                faultX = x[0];
-                                faultY = y[0];
-                                LatLng pin = new LatLng(x[0], y[0]);
-                                mousepositionx=faultX;
-                                mousepositiony=faultY;
-                                MarkerOptions markerOptions = new MarkerOptions()
-                                        .position(pin)
-                                        .title("Souris").icon(BitmapFromVector(getApplicationContext(), R.drawable.markercat));
-                                mMap.addMarker(markerOptions);
+                                if (x[0] != 0 && y[0] != 0){
+                                    faultX = x[0];
+                                    faultY = y[0];
+                                    LatLng pin = new LatLng(x[0], y[0]);
+                                    MarkerOptions markerOptions = new MarkerOptions()
+                                            .position(pin).icon(BitmapFromVector(getApplicationContext(), R.drawable.markercat));
+                                    mMap.addMarker(markerOptions);
+                                }
+
                             }
                         } else {
                             Toast.makeText(MapsActivity.this,"Error getting documents."+task.getException(),Toast.LENGTH_LONG).show();
@@ -239,6 +239,41 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                     }
                 });
     }
+
+    public void getOtherCatsPosition(){
+        mMap.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final double[] x = new double[1];
+        final double[] y = new double[1];
+        float zoomLevel = 15.0f;
+
+        db.collection("player").whereEqualTo("Room_id",room_id).whereNotEqualTo("isMouse",true)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Toast.makeText(MapsActivity.this,"OK",Toast.LENGTH_SHORT).show();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                x[0] = Double.parseDouble(document.getData().get("X").toString());
+                                y[0] = Double.parseDouble(document.getData().get("Y").toString());
+                                if (x[0] != 0 && y[0] != 0){
+                                    LatLng pin = new LatLng(x[0], y[0]);
+                                    MarkerOptions markerOptions = new MarkerOptions()
+                                            .position(pin)
+                                            .title("Chat").icon(BitmapFromVector(getApplicationContext(), R.drawable.markercat));
+                                    mMap.addMarker(markerOptions);
+                                }
+                            }
+                        } else {
+                            Toast.makeText(MapsActivity.this,"Error getting documents."+task.getException(),Toast.LENGTH_LONG).show();
+                            Log.w("TAG111", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+
 
     private void setupCompass() {
         Boolean permission_granted = GetBoolean("permission_granted");
@@ -252,8 +287,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                         1);
             }
         }
-
-
 
         compass = new Compass(this);
         Compass.CompassListener cl = new Compass.CompassListener() {
@@ -315,7 +348,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                 final double[] x = new double[1];
                 final double[] y = new double[1];
                 float zoomLevel = 15.0f;
-                db.collection("player").whereEqualTo("Room_id",room_id).whereNotEqualTo("isMouse",true)
+                db.collection("player").whereEqualTo("Room_id",room_id).whereNotEqualTo("isMouse",false)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -418,11 +451,13 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 x[0] = Double.parseDouble(document.getData().get("X").toString());
                                 y[0] = Double.parseDouble(document.getData().get("Y").toString());
-                                LatLng pin = new LatLng(x[0], y[0]);
-                                MarkerOptions markerOptions = new MarkerOptions()
-                                        .position(pin)
-                                        .title("Souris").icon(BitmapFromVector(getApplicationContext(), R.drawable.markermouse));
-                                mMap.addMarker(markerOptions);
+                                if (x[0] != 0 && y[0] != 0){
+                                    LatLng pin = new LatLng(x[0], y[0]);
+                                    MarkerOptions markerOptions = new MarkerOptions()
+                                            .position(pin)
+                                            .title("Souris").icon(BitmapFromVector(getApplicationContext(), R.drawable.markermouse));
+                                    mMap.addMarker(markerOptions);
+                                }
                             }
                         } else {
                             Toast.makeText(MapsActivity.this,"Error getting documents."+task.getException(),Toast.LENGTH_LONG).show();
@@ -516,8 +551,13 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                         Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(home);
                     }
-                    if (lastTime % 5 == 0 && isMouse) {
-                        getOthersPosition();
+                    if (lastTime % 5 == 0) {
+                        if (isMouse){
+                            getOthersPosition();
+                        }
+                        else{
+                            getOtherCatsPosition();
+                        }
                     }
                     if (lastTime % 300 == 0 && !isMouse) {
                         getMousePosition();
@@ -601,7 +641,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         Bundle extra = getIntent().getExtras();
         room_id = extra.getString("room_id");
         id = extra.getString("id");
-        pseudo = extra.getString("pseudo");
+        //pseudo = extra.getString("pseudo");
         //System.out.println("Pseudo"+pseudo);
         Mouse = extra.getString("Mouse");
         //timeSetted = extra.getInt("time");
