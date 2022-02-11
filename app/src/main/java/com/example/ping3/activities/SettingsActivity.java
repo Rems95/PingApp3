@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class SettingsActivity extends AppCompatActivity {
-    private Spinner timeSpinner,nbPlayersSpinner,levelSpinner;
+    private Spinner timeSpinner,nbPlayersSpinner,levelSpinner,refreshSpinner;
     private Button saveButton;
     DatabaseReference myRef;
     String id,userID;
@@ -48,6 +48,13 @@ public class SettingsActivity extends AppCompatActivity {
                 R.array.time, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timeSpinner.setAdapter(adapter);
+
+        refreshSpinner = findViewById(R.id.refreshSpinner);
+        ArrayAdapter<CharSequence> refreshAdapter = ArrayAdapter.createFromResource(this,
+                R.array.refresh, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        refreshSpinner.setAdapter(refreshAdapter);
+
 
 
 
@@ -73,6 +80,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int time = Integer.parseInt(timeSpinner.getSelectedItem().toString());
                 int nbPlayers = Integer.parseInt(nbPlayersSpinner.getSelectedItem().toString());
+                int refreshTime = Integer.parseInt(refreshSpinner.getSelectedItem().toString());
                 String level = levelSpinner.getSelectedItem().toString();
                 final int roomId = genRoomid();
                 System.out.println(FirebaseDatabase.getInstance().getReference());
@@ -91,6 +99,8 @@ public class SettingsActivity extends AppCompatActivity {
                         gr_push.setTime(time);
                         gr_push.setLevel(level);
                         gr_push.addPlayers(player);
+                        gr_push.setRefreshTime(refreshTime);
+
                         myRef.push().setValue(gr_push);
 
                         Intent intent = new Intent(getApplicationContext(), GameroomActivity.class);

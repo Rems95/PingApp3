@@ -12,6 +12,7 @@ public class gameroom_model {
     private Integer nbPlayers;
     private Integer time;
     private String level;
+    private Integer refreshTime;
 
     public gameroom_model(ArrayList<Player_model> players, String creator, Integer roomId, Integer status, Integer nbPlayers, Integer time, String level) {
         Players = players;
@@ -106,5 +107,13 @@ public class gameroom_model {
                 ", roomId=" + roomId +
                 ", status=" + status +
                 '}';
+    }
+
+    public Integer getRefreshTime() {
+        return refreshTime;
+    }
+
+    public void setRefreshTime(Integer refreshTime) {
+        this.refreshTime = refreshTime;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.ping3.activities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -187,6 +188,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (Integer.parseInt(snapshot.getValue().toString()) == 98){
                     chatStatus = false;
+                    onChatMute();
                 }
                 else {
                     chatStatus = true;
@@ -551,5 +553,24 @@ public class ChatActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         FirebaseDatabase.getInstance().getReference().child("gameRoom").child(id1).child("userMessages").child("messages").removeEventListener(messageListener);
+    }
+
+    public void onChatMute(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+        builder.setTitle("Attention");
+        builder.setMessage("Impossible d'utiliser chat room");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // myRef_exit.removeValue();
+            }
+        });
+        // Create the alert dialog using alert dialog builder
+        AlertDialog dialog = builder.create();
+
+        // Finally, display the dialog when user press back button
+        dialog.show();
     }
 }

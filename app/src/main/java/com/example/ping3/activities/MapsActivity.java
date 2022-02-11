@@ -6,6 +6,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -32,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -91,7 +93,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     TimerReceiver timerReceiver = null;
     String Mouse = null;
     boolean isMouse = false;
-    int timeSetted;
+    int timeSetted, refreshTime;
     private Compass compass;
     private ImageView arrowViewt;
     private TextView text_atas;
@@ -139,9 +141,8 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                 if (Integer.parseInt(snapshot.getValue().toString()) == 99){
                     stopTimer();
                     timerReceiver = null;
-                    Toast.makeText(getApplicationContext(), "Les chats gagnent!!!", Toast.LENGTH_LONG).show();
-                    Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(home);
+                    //Toast.makeText(getApplicationContext(), "Les chats gagnent!!!", Toast.LENGTH_LONG).show();
+                    onCatWin();
                 }
             }
             @Override
@@ -204,8 +205,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     }
 
 
-
-
+    /**
+     * for mouse to get all the cats' location
+     */
     public void getOthersPosition(){
         mMap.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -241,6 +243,11 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                 });
     }
 
+    /**
+     * for cats to get others cats' position
+     * but now it can also get its position
+     * may get updated soon
+     */
     public void getOtherCatsPosition(){
         mMap.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -436,6 +443,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         }
     }
 
+    /**
+     * for cat to get mouse's position
+     */
     public void getMousePosition(){
         mMap.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -467,6 +477,9 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                 });
     }
 
+    /**
+     * for everyone to get location of itself and upload to firebase
+     */
     private void getDeviceLocation(){
         float zoomLevel = 15.0f;
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -491,6 +504,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         }
     }
 
+    /**
+     * used when you come to this activity
+     * actually used to zoom
+     */
     private void getDeviceLocation1st(){
         float zoomLevel = 15.0f;
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -516,7 +533,11 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
     }
 
 
-
+    /**
+     * upload the position to firebase
+     * @param x
+     * @param y
+     */
     public void UpdatePosition(double x,double y){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -550,18 +571,21 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
 
     @Override
     protected void onResume() {
-        if(compass != null) {
-            compass.start();
-        }
-        handler.postDelayed(runnable = new Runnable() {
-            public void run() {
-                handler.postDelayed(runnable, 1000);
-                fetch_GPS();
-
+        if(!isMouse){
+            if(compass != null) {
+                compass.start();
             }
-        }, 1000);
+            handler.postDelayed(runnable = new Runnable() {
+                public void run() {
+                    handler.postDelayed(runnable, 1000);
+                    fetch_GPS();
+
+                }
+            }, 1000);
+        }
         super.onResume();
     }
+
     //TimerReceiver
     public class TimerReceiver extends BroadcastReceiver {
         @Override
@@ -571,14 +595,15 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                 int time = intent.getIntExtra("time", 0);
                 timer_tv.setText(timeCalculate(timeSetted - time));
                 lastTime = timeSetted - time;
+                //lastTime = 30 -time;//used for test
                 if (time != 0) {
                     if (lastTime == 0) {
                         stopTimer();
                         //unregisterReceiver(timerReceiver);
                         timerReceiver = null;
-                        Toast.makeText(getApplicationContext(), "The room is over", Toast.LENGTH_SHORT).show();
-                        Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(home);
+                        onTimeOut();
+                        //Toast.makeText(getApplicationContext(), "The room is over", Toast.LENGTH_SHORT).show();
+
                     }
                     if (lastTime % 5 == 0) {
                         if (isMouse){
@@ -588,7 +613,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                             getOtherCatsPosition();
                         }
                     }
-                    if (lastTime % 300 == 0 && !isMouse) {
+                    if (lastTime % (refreshTime*60) == 0 && !isMouse) {
                         getMousePosition();
                         fetch_GPS();
                     }
@@ -865,7 +890,19 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
                 }
             }
         });
-    }
+        myRef_initial.child(id).child("refreshTime").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    refreshTime = Integer.parseInt(String.valueOf(task.getResult().getValue()));
+                    Log.d("firebase111", String.valueOf(task.getResult().getValue()));
+                }
+            }
+        });
+        }
     @Override
     protected void onStart() {
         super.onStart();
@@ -908,6 +945,50 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMyLoc
         if (isMouse){
             myRef_status.setValue(99);
         }
+    }
+
+    public void onTimeOut(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+        builder.setTitle("Game over");
+        builder.setMessage("Souris gagne!!!!!!!");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(home);
+                // myRef_exit.removeValue();
+
+            }
+        });
+        // Create the alert dialog using alert dialog builder
+        AlertDialog dialog = builder.create();
+
+        // Finally, display the dialog when user press back button
+        dialog.show();
+    }
+
+    public void onCatWin(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+        builder.setTitle("Game over");
+        builder.setMessage("Les chats gagnent!!!!!!!");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent home = new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(home);
+                // myRef_exit.removeValue();
+
+            }
+        });
+        // Create the alert dialog using alert dialog builder
+        AlertDialog dialog = builder.create();
+
+        // Finally, display the dialog when user press back button
+        dialog.show();
     }
 
 }
